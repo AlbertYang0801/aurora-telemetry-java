@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.aurora.grpc";
+option java_outer_classname = "TelemetryProto";
+
+package aurora;
+
+service TelemetryService {
+  // 原始流式接口：客户端持续发送数据，服务端最后返回结果
+  rpc Report(stream TelemetryRequest) returns (Ack);
+
+  // 新增批量接口：一次性发送多条指标数据
+  rpc ReportBatch(BatchTelemetryRequest) returns (Ack);
+}
+
+// 单个指标请求
+message TelemetryRequest {
+  string metric = 1;            // 指标名
+  double value = 2;             // 指标值
+  int64 timestamp = 3;          // Unix毫秒时间戳
+  map<string, string> tags = 4; // 标签
+}
+
+// 批量指标请求
+message BatchTelemetryRequest {
+  repeated TelemetryRequest metrics = 1; // 多条指标
+}
+
+// 返回结果
+message Ack {
+  int32 code = 1;               // 200=成功
+  string message = 2;
+}

@@ -1,0 +1,19 @@
+# gRPC 端口
+grpc:
+  server:
+    port: 9090
+    # 10MB
+    max-inbound-message-size: 10485760
+    executor:
+      core-pool-size: 16
+      max-pool-size: 32
+
+#spring:
+#  kafka:
+#    bootstrap-servers: localhost:9092
+#    producer:
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#      batch-size: 5000       # 批量大小
+#      linger-ms: 100         # 等待时间
+#      compression-type: lz4  # 压缩算法

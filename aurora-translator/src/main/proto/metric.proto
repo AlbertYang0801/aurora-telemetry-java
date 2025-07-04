@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.aurora.grpc";
+option java_outer_classname = "MetricProto";
+
+package aurora;
+
+service MetricService {
+  // 原始流式接口：客户端持续发送数据，服务端最后返回结果
+  rpc Report(stream RootMessage) returns (MetricAck);
+
+  // 新增批量接口：一次性发送多条指标数据
+  rpc ReportBatch(BatchMetricRequest) returns (MetricAck);
+}
+
+// 新增消息结构：用于完整映射原始JSON
+message RootMessage {
+  int32 placeId = 1;
+  string ip = 2;
+  repeated MetricItem metrics = 3;
+}
+
+message MetricItem {
+  int32 tid = 4;
+  int32 pid = 5;
+  double value = 6;
+}
+
+
+// 批量指标请求
+message BatchMetricRequest {
+  repeated RootMessage metrics = 1;
+}
+
+
+// 返回结果
+message MetricAck {
+  int32 code = 1;               // 200=成功
+  string message = 2;
+}
+
