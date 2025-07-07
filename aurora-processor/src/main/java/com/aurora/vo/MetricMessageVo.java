@@ -3,7 +3,7 @@ package com.aurora.vo;
 import lombok.Data;
 
 /**
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/7/7 14:56
  */
 @Data

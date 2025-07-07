@@ -1,20 +1,16 @@
 package com.aurora.kafka;
 
-import com.aurora.config.KafkaTopicConfig;
-import org.apache.kafka.common.protocol.types.Field;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import javax.annotation.Resource;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/7/7 15:17
  */
 @Component

@@ -1,6 +1,7 @@
 package com.aurora.kafka;
 
 import cn.hutool.core.convert.Convert;
+import com.aurora.config.KafkaCustomConfig;
 import com.aurora.config.KafkaTopicConfig;
 import com.aurora.grpc.MetricMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class KafkaHelper {
 
     @Autowired
-    KafkaTopicConfig kafkaTopicConfig;
+    KafkaCustomConfig kafkaCustomConfig;
     @Autowired
     KafkaCustomProducer kafkaCustomProducer;
 
@@ -23,7 +24,7 @@ public class KafkaHelper {
         byte[] data = metricMessage.toByteArray();
         //指定placeId为partitionKey
         int placeId = metricMessage.getPlaceId();
-        kafkaCustomProducer.send(kafkaTopicConfig.getMetricTopic(), Convert.toStr(placeId),data);
+        kafkaCustomProducer.send(kafkaCustomConfig.getMetricTopic(), Convert.toStr(placeId),data);
     }
 
 

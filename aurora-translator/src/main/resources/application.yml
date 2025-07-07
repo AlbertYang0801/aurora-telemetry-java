@@ -23,5 +23,5 @@ spring:
       max-request-size: 5242880 # 生产者发送消息的大小。可以是一个消息的大小，也可以发送的一个批次的消息大小
 
 kafka:
-  topics:
+  custom:
     metric-topic: metric

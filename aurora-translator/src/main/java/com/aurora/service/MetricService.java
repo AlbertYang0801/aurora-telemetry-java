@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 打印消息内容
+ * 接收Metric指标数据
  *
- * @author yangjunwei
+ * @author AlertYang
  * @date 2025/7/4 15:41
  */
 @GrpcService
@@ -72,8 +72,6 @@ public class MetricService extends MetricServiceGrpc.MetricServiceImplBase {
             }
         };
     }
-
-
 
 
 }

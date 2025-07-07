@@ -5,13 +5,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/7/7 15:39
  */
 @Configuration
-@ConfigurationProperties(prefix = "kafka.topics")
+@ConfigurationProperties(prefix = "kafka.custom")
 @Data
-public class KafkaTopicConfig {
+public class KafkaCustomConfig {
 
     private String metricTopic;
 

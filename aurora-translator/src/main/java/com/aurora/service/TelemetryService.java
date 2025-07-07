@@ -9,8 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 
 /**
- * 打印消息内容
- * @author yangjunwei
+ * 测试指标接收
+ * @author AlbertYang
  * @date 2025/7/4 15:41
  */
 @GrpcService
