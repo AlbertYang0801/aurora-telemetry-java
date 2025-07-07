@@ -8,29 +8,28 @@ package aurora;
 
 service MetricService {
   // 原始流式接口：客户端持续发送数据，服务端最后返回结果
-  rpc Report(stream RootMessage) returns (MetricAck);
+  rpc Report(stream MetricMessage) returns (MetricAck);
 
-  // 新增批量接口：一次性发送多条指标数据
-  rpc ReportBatch(BatchMetricRequest) returns (MetricAck);
 }
 
 // 新增消息结构：用于完整映射原始JSON
-message RootMessage {
+message MetricMessage {
   int32 placeId = 1;
   string ip = 2;
-  repeated MetricItem metrics = 3;
+  int64 time = 3;
+  repeated MetricItem metrics = 4;
 }
 
 message MetricItem {
-  int32 tid = 4;
-  int32 pid = 5;
-  double value = 6;
+  int32 tid = 5;
+  int32 pid = 6;
+  double value = 7;
 }
 
 
 // 批量指标请求
 message BatchMetricRequest {
-  repeated RootMessage metrics = 1;
+  repeated MetricMessage metrics = 1;
 }
 
 

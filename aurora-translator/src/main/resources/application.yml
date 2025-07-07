@@ -8,12 +8,20 @@ grpc:
       core-pool-size: 16
       max-pool-size: 32
 
-#spring:
-#  kafka:
-#    bootstrap-servers: localhost:9092
-#    producer:
-#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-#      batch-size: 5000       # 批量大小
-#      linger-ms: 100         # 等待时间
-#      compression-type: lz4  # 压缩算法
+spring:
+  kafka:
+    bootstrap-servers: 118.25.129.41:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      batch-size: 16384       # 单个批次（Batch）中未压缩消息的最大字节数（默认 16KB）
+      linger-ms: 1         # 生产者在发送一个批次之前，可以适当的等一小会，这样可以让更多的消息加入到该批次。这样会造成延时增加，但是降低了IO开销，增加了吞吐量
+      compression-type: lz4  # 压缩算法
+      acks: 1 #默认值即为1。生产者发送消息之后，只要分区的leader副本成功写入消息，那么它就会收到来自服务端的成功响应
+      retries: 10
+      buffer-memory: 33554432  # 生产者的内存缓冲区大小。如果生产者发送消息的速度 > 消息发送到kafka的速度，那么消息就会在缓冲区堆积，导致缓冲区不足。这个时候，send()方法要么阻塞，要么抛出异常。
+      max-request-size: 5242880 # 生产者发送消息的大小。可以是一个消息的大小，也可以发送的一个批次的消息大小
+
+kafka:
+  topics:
+    metric-topic: metric
