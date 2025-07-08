@@ -4,7 +4,7 @@ spring:
     consumer:
       group-id: common-consumer
       enable-auto-commit: true
-      auto-commit-interval: 5000
+      auto-commit-interval: 1000
       max-poll-records: 1000  # 单次拉取的最大条数
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
@@ -13,13 +13,14 @@ spring:
 # 自定义kafka配置
 kafka:
   custom:
-    # 指标topic
-    metric-topic: metric
     # kafka认证开关
     auth-switch: false
     # SASL mechanism配置
     sasl-mechanism: SCRAM-SHA-256
     # 授权信息
     sasl-jaas-config: org.apache.kafka.common.security.scram.ScramLoginModule required username=\"admin\" password=\"adminpwd\";
-    # 消费线程池大小
-    thread-pool-size: 10
+    # 指标topic
+    metric-topic: metric
+    # metric topic对应的消费线程池大小
+    metric-thread-pool-size: 10
+

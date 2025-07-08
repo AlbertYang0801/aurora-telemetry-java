@@ -24,6 +24,6 @@ public class KafkaCustomConfig {
 
     private String metricTopic;
 
-    private Integer threadPoolSize;
+    private Integer metricThreadPoolSize;
 
 }

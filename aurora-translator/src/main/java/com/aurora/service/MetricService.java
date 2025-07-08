@@ -1,11 +1,10 @@
 package com.aurora.service;
 
 import cn.hutool.json.JSONUtil;
-import cn.hutool.json.serialize.JSONWriter;
-import com.aurora.grpc.*;
+import com.aurora.grpc.MetricAck;
+import com.aurora.grpc.MetricMessage;
+import com.aurora.grpc.MetricServiceGrpc;
 import com.aurora.kafka.KafkaHelper;
-import com.aurora.vo.MetricMessageVo;
-import io.grpc.internal.JsonUtil;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -35,23 +34,8 @@ public class MetricService extends MetricServiceGrpc.MetricServiceImplBase {
             @Override
             public void onNext(MetricMessage metricMessage) {
                 System.out.println("receiver msg:\n" + metricMessage.toString());
-
-                List<MetricMessageVo> metricMessageVos = new ArrayList<>();
-                metricMessage.getMetricsList().forEach(metricItem -> {
-                    MetricMessageVo metricMessageVo = new MetricMessageVo();
-                    metricMessageVo.setPlaceId(metricMessage.getPlaceId());
-                    metricMessageVo.setIp(metricMessage.getIp());
-                    metricMessageVo.setTime(metricMessage.getTime());
-                    metricMessageVo.setPid(metricItem.getPid());
-                    metricMessageVo.setTid(metricItem.getTid());
-                    metricMessageVo.setValue(metricItem.getValue());
-                    metricMessageVos.add(metricMessageVo);
-                });
-                System.out.println("receiver msg:\n" + JSONUtil.toJsonStr(metricMessageVos));
-
                 //直接发送给kafka
                 kafkaHelper.sendMetric(metricMessage);
-
                 messageCount++;
             }
 
