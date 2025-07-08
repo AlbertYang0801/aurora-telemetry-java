@@ -26,13 +26,6 @@ message MetricItem {
   double value = 7;
 }
 
-
-// 批量指标请求
-message BatchMetricRequest {
-  repeated MetricMessage metrics = 1;
-}
-
-
 // 返回结果
 message MetricAck {
   int32 code = 1;               // 200=成功

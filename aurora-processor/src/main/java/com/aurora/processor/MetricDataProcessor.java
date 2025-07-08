@@ -3,7 +3,7 @@ package com.aurora.processor;
 import cn.hutool.core.thread.NamedThreadFactory;
 import com.aurora.config.KafkaCustomConfig;
 import com.aurora.service.MetricService;
-import com.aurora.threadpool.BlockReceiverRejectionHandler;
+import com.aurora.handler.BlockReceiverRejectionHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;

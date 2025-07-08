@@ -2,7 +2,6 @@ package com.aurora.kafka;
 
 import cn.hutool.core.convert.Convert;
 import com.aurora.config.KafkaCustomConfig;
-import com.aurora.grpc.MetricMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

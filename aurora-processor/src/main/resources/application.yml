@@ -1,4 +1,16 @@
 spring:
+  datasource:
+    clickhouse:
+      url: jdbc:clickhouse://118.25.129.41:8123/test_db
+      username: test
+      password: 123456
+      driver-class-name: ru.yandex.clickhouse.ClickHouseDriver
+      initialization-mode: always
+      hikari:
+        maximum-pool-size: 10
+        minimum-idle: 2
+
+
   kafka:
     bootstrap-servers: 118.25.129.41:9092
     consumer:
@@ -8,6 +20,7 @@ spring:
       max-poll-records: 1000  # 单次拉取的最大条数
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+
 
 
 # 自定义kafka配置

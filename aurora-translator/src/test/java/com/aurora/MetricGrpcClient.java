@@ -1,9 +1,5 @@
 package com.aurora;
 
-import com.aurora.grpc.MetricAck;
-import com.aurora.grpc.MetricItem;
-import com.aurora.grpc.MetricMessage;
-import com.aurora.grpc.MetricServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;

@@ -1,9 +1,6 @@
 package com.aurora.service;
 
 import com.aurora.grpc.Ack;
-import com.aurora.grpc.BatchTelemetryRequest;
-import com.aurora.grpc.TelemetryRequest;
-import com.aurora.grpc.TelemetryServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
