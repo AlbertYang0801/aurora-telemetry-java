@@ -38,10 +38,10 @@ public final class MetricProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014metric.proto\022\006aurora\"_\n\rMetricMessage\022" +
+      "\n\014metric.proto\022\006aurora\"l\n\rMetricMessage\022" +
       "\017\n\007placeId\030\001 \001(\005\022\n\n\002ip\030\002 \001(\t\022\014\n\004time\030\003 \001" +
-      "(\003\022#\n\007metrics\030\004 \003(\0132\022.aurora.MetricItem\"" +
-      "5\n\nMetricItem\022\013\n\003tid\030\005 \001(\005\022\013\n\003pid\030\006 \001(\005\022" +
+      "(\003\022\013\n\003pid\030\004 \001(\005\022#\n\007metrics\030\005 \003(\0132\022.auror" +
+      "a.MetricItem\"(\n\nMetricItem\022\013\n\003tid\030\006 \001(\005\022" +
       "\r\n\005value\030\007 \001(\001\"*\n\tMetricAck\022\014\n\004code\030\001 \001(" +
       "\005\022\017\n\007message\030\002 \001(\t2E\n\rMetricService\0224\n\006R" +
       "eport\022\025.aurora.MetricMessage\032\021.aurora.Me" +
@@ -57,13 +57,13 @@ public final class MetricProto {
     internal_static_aurora_MetricMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_aurora_MetricMessage_descriptor,
-        new java.lang.String[] { "PlaceId", "Ip", "Time", "Metrics", });
+        new java.lang.String[] { "PlaceId", "Ip", "Time", "Pid", "Metrics", });
     internal_static_aurora_MetricItem_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_aurora_MetricItem_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_aurora_MetricItem_descriptor,
-        new java.lang.String[] { "Tid", "Pid", "Value", });
+        new java.lang.String[] { "Tid", "Value", });
     internal_static_aurora_MetricAck_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_aurora_MetricAck_fieldAccessorTable = new

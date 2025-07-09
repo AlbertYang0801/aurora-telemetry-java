@@ -17,12 +17,12 @@ message MetricMessage {
   int32 placeId = 1;
   string ip = 2;
   int64 time = 3;
-  repeated MetricItem metrics = 4;
+  int32 pid = 4;
+  repeated MetricItem metrics = 5;
 }
 
 message MetricItem {
-  int32 tid = 5;
-  int32 pid = 6;
+  int32 tid = 6;
   double value = 7;
 }
 

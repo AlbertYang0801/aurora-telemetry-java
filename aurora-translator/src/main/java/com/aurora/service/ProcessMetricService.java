@@ -1,8 +1,6 @@
 package com.aurora.service;
 
-import com.aurora.grpc.MetricAck;
-import com.aurora.grpc.MetricMessage;
-import com.aurora.grpc.MetricServiceGrpc;
+import com.aurora.grpc.*;
 import com.aurora.kafka.KafkaHelper;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
@@ -17,21 +15,21 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @GrpcService
 @Slf4j
-public class MetricService extends MetricServiceGrpc.MetricServiceImplBase {
+public class ProcessMetricService extends ProcessMetricServiceGrpc.ProcessMetricServiceImplBase {
 
     @Autowired
     private KafkaHelper kafkaHelper;
 
     @Override
-    public StreamObserver<MetricMessage> report(StreamObserver<MetricAck> responseObserver) {
+    public StreamObserver<ProcessMetricMessage> report(StreamObserver<ProcessMetricAck> responseObserver) {
         return new StreamObserver<>() {
             private int messageCount = 0;
 
             @Override
-            public void onNext(MetricMessage metricMessage) {
-                System.out.println("receiver msg:\n" + metricMessage.toString());
+            public void onNext(ProcessMetricMessage processMetricMessage) {
+                System.out.println("receiver msg:\n" + processMetricMessage.toString());
                 //直接发送给kafka
-                kafkaHelper.sendMetric(metricMessage);
+                kafkaHelper.sendProcessMetric(processMetricMessage);
                 messageCount++;
             }
 
@@ -43,11 +41,11 @@ public class MetricService extends MetricServiceGrpc.MetricServiceImplBase {
             @Override
             public void onCompleted() {
                 String format = String.format("Processed %d messages", messageCount);
-                MetricAck metricAck = MetricAck.newBuilder()
+                ProcessMetricAck processMetricAck = ProcessMetricAck.newBuilder()
                         .setCode(200)
                         .setMessage(format)
                         .build();
-                responseObserver.onNext(metricAck);
+                responseObserver.onNext(processMetricAck);
                 responseObserver.onCompleted();
             }
         };

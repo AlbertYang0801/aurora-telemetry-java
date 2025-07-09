@@ -1,9 +1,6 @@
 package com.aurora;
 
-import com.aurora.grpc.MetricAck;
-import com.aurora.grpc.MetricItem;
-import com.aurora.grpc.MetricMessage;
-import com.aurora.grpc.MetricServiceGrpc;
+import com.aurora.grpc.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
@@ -17,14 +14,14 @@ import java.util.concurrent.TimeUnit;
  * @author yangjunwei
  * @date 2025/7/7 13:49
  */
-public class MetricGrpcClient {
+public class ProcessMetricGrpcClient {
     private final ManagedChannel channel;
 
     //流式
-    private final MetricServiceGrpc.MetricServiceStub asyncStub;
+    private final ProcessMetricServiceGrpc.ProcessMetricServiceStub asyncStub;
 
     // 初始化客户端，连接到gRPC服务器
-    public MetricGrpcClient(String host, int port) {
+    public ProcessMetricGrpcClient(String host, int port) {
         this(ManagedChannelBuilder.forAddress(host, port)
                 // 这里可以配置通道参数
                 .usePlaintext() // 仅用于测试，生产环境应该使用TLS
@@ -32,9 +29,9 @@ public class MetricGrpcClient {
     }
 
     // 使用已有的通道
-    public MetricGrpcClient(ManagedChannel channel) {
+    public ProcessMetricGrpcClient(ManagedChannel channel) {
         this.channel = channel;
-        asyncStub = MetricServiceGrpc.newStub(channel);
+        asyncStub = ProcessMetricServiceGrpc.newStub(channel);
     }
 
     // 关闭连接
@@ -43,15 +40,15 @@ public class MetricGrpcClient {
     }
 
     // 调用服务方法
-    public void sendClientStream(List<MetricMessage> metricMessages) throws InterruptedException {
+    public void sendClientStream(List<ProcessMetricMessage> metricMessages) throws InterruptedException {
 
         // 用于等待异步调用完成的计数器
         final CountDownLatch finishLatch = new CountDownLatch(1);
 
         // 创建响应观察者
-        StreamObserver<MetricAck> responseObserver = new StreamObserver<MetricAck>() {
+        StreamObserver<ProcessMetricAck> responseObserver = new StreamObserver<>() {
             @Override
-            public void onNext(MetricAck reply) {
+            public void onNext(ProcessMetricAck reply) {
                 System.out.println("收到服务端响应: " + reply.getMessage());
             }
 
@@ -69,11 +66,11 @@ public class MetricGrpcClient {
         };
 
         // 创建请求观察者
-        StreamObserver<MetricMessage> requestObserver = asyncStub.report(responseObserver);
+        StreamObserver<ProcessMetricMessage> requestObserver = asyncStub.report(responseObserver);
 
         try {
             // 发送多个请求
-            for (MetricMessage metricMessage : metricMessages) {
+            for (ProcessMetricMessage metricMessage : metricMessages) {
                 System.out.println("发送请求: \n" + metricMessage.toString());
                 requestObserver.onNext(metricMessage);
 
@@ -95,20 +92,21 @@ public class MetricGrpcClient {
 
     public static void main(String[] args) throws InterruptedException {
         // 创建客户端，连接到服务器
-        MetricGrpcClient client = new MetricGrpcClient("localhost", 9090);
+        ProcessMetricGrpcClient client = new ProcessMetricGrpcClient("localhost", 9090);
         try {
-            List<MetricMessage> rootMessages = new ArrayList<>();
+            List<ProcessMetricMessage> rootMessages = new ArrayList<>();
 
-            rootMessages.add(MetricMessage.newBuilder()
+            rootMessages.add(ProcessMetricMessage.newBuilder()
                     .setIp("192.168.1.1")
                     .setPlaceId(1)
                     .setTime(System.currentTimeMillis())
-                    .setPid(1)
-                    .addMetrics(MetricItem.newBuilder()
+                    .setCFlag(1)
+                    .setXid(1)
+                    .addMetrics(ProcessMetricItem.newBuilder()
                             .setTid(1)
                             .setValue(0.5)
                             .build())
-                    .addMetrics(MetricItem.newBuilder()
+                    .addMetrics(ProcessMetricItem.newBuilder()
                             .setTid(2)
                             .setValue(1)
                             .build())

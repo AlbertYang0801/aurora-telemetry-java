@@ -1,9 +1,14 @@
 package com.aurora.service;
 
+import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
+import com.aurora.clickhouse.ClickHouseDataBuffer;
+import com.aurora.clickhouse.ClickHouseDataExporter;
+import com.aurora.clickhouse.ClickHouseInsertHandler;
+import com.aurora.entity.MetricDo;
+import com.aurora.enums.ClickHouseDataType;
 import com.aurora.grpc.MetricItem;
 import com.aurora.grpc.MetricMessage;
-import com.aurora.vo.MetricMessageVo;
 import com.google.protobuf.InvalidProtocolBufferException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +23,6 @@ import java.util.List;
 public class MetricService implements Runnable {
 
     private static final Logger logger = LogManager.getLogger(MetricService.class);
-
 
     private final byte[] data;
 
@@ -35,27 +39,23 @@ public class MetricService implements Runnable {
         } catch (InvalidProtocolBufferException e) {
             throw new RuntimeException(e);
         }
-        List<MetricMessageVo> metricMessageVos = convert(metricMessage);
-
-        //TODO 本地聚合
-
-        //TODO 上传到ck
-        System.out.println(JSONUtil.toJsonStr(metricMessageVos));
+        List<MetricDo> metricMessageVos = convert(metricMessage);
+        SpringUtil.getBean(ClickHouseDataExporter.class).exportBatch(metricMessageVos, ClickHouseDataType.METRIC);
     }
 
-    private List<MetricMessageVo> convert(MetricMessage metricMessage) {
-        List<MetricMessageVo> metricMessageVos = new ArrayList<>();
+    private List<MetricDo> convert(MetricMessage metricMessage) {
+        List<MetricDo> metricDos = new ArrayList<>();
         for (MetricItem metricItem : metricMessage.getMetricsList()) {
-            MetricMessageVo metricMessageVo = new MetricMessageVo();
-            metricMessageVo.setPlaceId(metricMessage.getPlaceId());
-            metricMessageVo.setIp(metricMessage.getIp());
-            metricMessageVo.setTime(metricMessage.getTime());
-            metricMessageVo.setPid(metricItem.getPid());
-            metricMessageVo.setTid(metricItem.getTid());
-            metricMessageVo.setValue(metricItem.getValue());
-            metricMessageVos.add(metricMessageVo);
+            MetricDo metricDo = new MetricDo();
+            metricDo.setPlaceId(metricMessage.getPlaceId());
+            metricDo.setIp(metricMessage.getIp());
+            metricDo.setTime(metricMessage.getTime());
+            metricDo.setPid(metricMessage.getPid());
+            metricDo.setTid(metricItem.getTid());
+            metricDo.setValue(metricItem.getValue());
+            metricDos.add(metricDo);
         }
-        return metricMessageVos;
+        return metricDos;
     }
 
 

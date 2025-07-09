@@ -32,25 +32,31 @@ public interface MetricMessageOrBuilder extends
   long getTime();
 
   /**
-   * <code>repeated .aurora.MetricItem metrics = 4;</code>
+   * <code>int32 pid = 4;</code>
+   * @return The pid.
+   */
+  int getPid();
+
+  /**
+   * <code>repeated .aurora.MetricItem metrics = 5;</code>
    */
   java.util.List<com.aurora.grpc.MetricItem> 
       getMetricsList();
   /**
-   * <code>repeated .aurora.MetricItem metrics = 4;</code>
+   * <code>repeated .aurora.MetricItem metrics = 5;</code>
    */
   com.aurora.grpc.MetricItem getMetrics(int index);
   /**
-   * <code>repeated .aurora.MetricItem metrics = 4;</code>
+   * <code>repeated .aurora.MetricItem metrics = 5;</code>
    */
   int getMetricsCount();
   /**
-   * <code>repeated .aurora.MetricItem metrics = 4;</code>
+   * <code>repeated .aurora.MetricItem metrics = 5;</code>
    */
   java.util.List<? extends com.aurora.grpc.MetricItemOrBuilder> 
       getMetricsOrBuilderList();
   /**
-   * <code>repeated .aurora.MetricItem metrics = 4;</code>
+   * <code>repeated .aurora.MetricItem metrics = 5;</code>
    */
   com.aurora.grpc.MetricItemOrBuilder getMetricsOrBuilder(
       int index);

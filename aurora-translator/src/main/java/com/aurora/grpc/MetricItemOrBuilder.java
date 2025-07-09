@@ -8,16 +8,10 @@ public interface MetricItemOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 tid = 5;</code>
+   * <code>int32 tid = 6;</code>
    * @return The tid.
    */
   int getTid();
-
-  /**
-   * <code>int32 pid = 6;</code>
-   * @return The pid.
-   */
-  int getPid();
 
   /**
    * <code>double value = 7;</code>

@@ -2,11 +2,13 @@
 grpc:
   server:
     port: 9090
+
     # 10MB
     max-inbound-message-size: 10485760
     executor:
       core-pool-size: 16
       max-pool-size: 32
+
 
 spring:
   kafka:

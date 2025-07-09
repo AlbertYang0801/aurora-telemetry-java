@@ -38,26 +38,15 @@ private static final long serialVersionUID = 0L;
             com.aurora.grpc.MetricItem.class, com.aurora.grpc.MetricItem.Builder.class);
   }
 
-  public static final int TID_FIELD_NUMBER = 5;
+  public static final int TID_FIELD_NUMBER = 6;
   private int tid_ = 0;
   /**
-   * <code>int32 tid = 5;</code>
+   * <code>int32 tid = 6;</code>
    * @return The tid.
    */
   @java.lang.Override
   public int getTid() {
     return tid_;
-  }
-
-  public static final int PID_FIELD_NUMBER = 6;
-  private int pid_ = 0;
-  /**
-   * <code>int32 pid = 6;</code>
-   * @return The pid.
-   */
-  @java.lang.Override
-  public int getPid() {
-    return pid_;
   }
 
   public static final int VALUE_FIELD_NUMBER = 7;
@@ -86,10 +75,7 @@ private static final long serialVersionUID = 0L;
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (tid_ != 0) {
-      output.writeInt32(5, tid_);
-    }
-    if (pid_ != 0) {
-      output.writeInt32(6, pid_);
+      output.writeInt32(6, tid_);
     }
     if (java.lang.Double.doubleToRawLongBits(value_) != 0) {
       output.writeDouble(7, value_);
@@ -105,11 +91,7 @@ private static final long serialVersionUID = 0L;
     size = 0;
     if (tid_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(5, tid_);
-    }
-    if (pid_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(6, pid_);
+        .computeInt32Size(6, tid_);
     }
     if (java.lang.Double.doubleToRawLongBits(value_) != 0) {
       size += com.google.protobuf.CodedOutputStream
@@ -132,8 +114,6 @@ private static final long serialVersionUID = 0L;
 
     if (getTid()
         != other.getTid()) return false;
-    if (getPid()
-        != other.getPid()) return false;
     if (java.lang.Double.doubleToLongBits(getValue())
         != java.lang.Double.doubleToLongBits(
             other.getValue())) return false;
@@ -150,8 +130,6 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + TID_FIELD_NUMBER;
     hash = (53 * hash) + getTid();
-    hash = (37 * hash) + PID_FIELD_NUMBER;
-    hash = (53 * hash) + getPid();
     hash = (37 * hash) + VALUE_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         java.lang.Double.doubleToLongBits(getValue()));
@@ -287,7 +265,6 @@ private static final long serialVersionUID = 0L;
       super.clear();
       bitField0_ = 0;
       tid_ = 0;
-      pid_ = 0;
       value_ = 0D;
       return this;
     }
@@ -326,9 +303,6 @@ private static final long serialVersionUID = 0L;
         result.tid_ = tid_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.pid_ = pid_;
-      }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
         result.value_ = value_;
       }
     }
@@ -380,9 +354,6 @@ private static final long serialVersionUID = 0L;
       if (other.getTid() != 0) {
         setTid(other.getTid());
       }
-      if (other.getPid() != 0) {
-        setPid(other.getPid());
-      }
       if (other.getValue() != 0D) {
         setValue(other.getValue());
       }
@@ -412,19 +383,14 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            case 40: {
+            case 48: {
               tid_ = input.readInt32();
               bitField0_ |= 0x00000001;
-              break;
-            } // case 40
-            case 48: {
-              pid_ = input.readInt32();
-              bitField0_ |= 0x00000002;
               break;
             } // case 48
             case 57: {
               value_ = input.readDouble();
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000002;
               break;
             } // case 57
             default: {
@@ -446,7 +412,7 @@ private static final long serialVersionUID = 0L;
 
     private int tid_ ;
     /**
-     * <code>int32 tid = 5;</code>
+     * <code>int32 tid = 6;</code>
      * @return The tid.
      */
     @java.lang.Override
@@ -454,7 +420,7 @@ private static final long serialVersionUID = 0L;
       return tid_;
     }
     /**
-     * <code>int32 tid = 5;</code>
+     * <code>int32 tid = 6;</code>
      * @param value The tid to set.
      * @return This builder for chaining.
      */
@@ -466,44 +432,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>int32 tid = 5;</code>
+     * <code>int32 tid = 6;</code>
      * @return This builder for chaining.
      */
     public Builder clearTid() {
       bitField0_ = (bitField0_ & ~0x00000001);
       tid_ = 0;
-      onChanged();
-      return this;
-    }
-
-    private int pid_ ;
-    /**
-     * <code>int32 pid = 6;</code>
-     * @return The pid.
-     */
-    @java.lang.Override
-    public int getPid() {
-      return pid_;
-    }
-    /**
-     * <code>int32 pid = 6;</code>
-     * @param value The pid to set.
-     * @return This builder for chaining.
-     */
-    public Builder setPid(int value) {
-
-      pid_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>int32 pid = 6;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearPid() {
-      bitField0_ = (bitField0_ & ~0x00000002);
-      pid_ = 0;
       onChanged();
       return this;
     }
@@ -525,7 +459,7 @@ private static final long serialVersionUID = 0L;
     public Builder setValue(double value) {
 
       value_ = value;
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
@@ -534,7 +468,7 @@ private static final long serialVersionUID = 0L;
      * @return This builder for chaining.
      */
     public Builder clearValue() {
-      bitField0_ = (bitField0_ & ~0x00000004);
+      bitField0_ = (bitField0_ & ~0x00000002);
       value_ = 0D;
       onChanged();
       return this;

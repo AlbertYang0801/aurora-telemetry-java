@@ -1,7 +1,7 @@
 package com.aurora.kafka;
 
 import cn.hutool.json.JSONUtil;
-import com.aurora.config.KafkaCustomConfig;
+import com.aurora.config.KafkaCustomProperties;
 import com.aurora.processor.DataProcessor;
 import com.aurora.processor.KafkaProcessorFactory;
 import org.apache.kafka.clients.CommonClientConfigs;
@@ -38,7 +38,7 @@ public class KafkaCustomReceiver {
     private static long count = 0;
 
     @Resource
-    KafkaCustomConfig kafkaCustomConfig;
+    KafkaCustomProperties kafkaCustomProperties;
     @Resource
     KafkaProperties kafkaProperties;
     @Resource
@@ -54,15 +54,15 @@ public class KafkaCustomReceiver {
         props.put("max.poll.interval.ms", Integer.MAX_VALUE);
         props.put("key.deserializer", kafkaProperties.getConsumer().getKeyDeserializer());
         props.put("value.deserializer", kafkaProperties.getConsumer().getValueDeserializer());
-        if (kafkaCustomConfig.isAuthSwitch()) {
+        if (kafkaCustomProperties.isAuthSwitch()) {
             //安全协议
             props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_PLAINTEXT");
-            props.put(SaslConfigs.SASL_MECHANISM, kafkaCustomConfig.getSaslMechanism());
-            props.put(SaslConfigs.SASL_JAAS_CONFIG, kafkaCustomConfig.getSaslJaasConfig());
+            props.put(SaslConfigs.SASL_MECHANISM, kafkaCustomProperties.getSaslMechanism());
+            props.put(SaslConfigs.SASL_JAAS_CONFIG, kafkaCustomProperties.getSaslJaasConfig());
         }
         List<String> topics = new ArrayList<>();
         //metric-topic
-        topics.add(kafkaCustomConfig.getMetricTopic());
+        topics.add(kafkaCustomProperties.getMetricTopic());
         KafkaConsumer<String, byte[]> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(topics);
         logger.info("Subscribe kafka topics: {}", JSONUtil.toJsonStr(topics));

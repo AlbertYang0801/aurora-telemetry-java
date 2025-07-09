@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "kafka.custom")
 @Data
-public class KafkaCustomConfig {
+public class KafkaCustomProperties {
 
     private boolean authSwitch;
 

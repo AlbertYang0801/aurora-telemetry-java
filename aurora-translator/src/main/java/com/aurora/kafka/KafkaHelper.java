@@ -2,6 +2,8 @@ package com.aurora.kafka;
 
 import cn.hutool.core.convert.Convert;
 import com.aurora.config.KafkaCustomConfig;
+import com.aurora.grpc.MetricMessage;
+import com.aurora.grpc.ProcessMetricMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,14 @@ public class KafkaHelper {
         byte[] data = metricMessage.toByteArray();
         //指定placeId为partitionKey
         int placeId = metricMessage.getPlaceId();
+        kafkaCustomProducer.send(kafkaCustomConfig.getMetricTopic(), Convert.toStr(placeId),data);
+    }
+
+    public void sendProcessMetric(ProcessMetricMessage processMetricMessage) {
+        //protoBuf格式转byte数组
+        byte[] data = processMetricMessage.toByteArray();
+        //指定placeId为partitionKey
+        int placeId = processMetricMessage.getPlaceId();
         kafkaCustomProducer.send(kafkaCustomConfig.getMetricTopic(), Convert.toStr(placeId),data);
     }
 

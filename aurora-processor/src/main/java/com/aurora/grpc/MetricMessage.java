@@ -24,24 +24,24 @@ private static final long serialVersionUID = 0L;
     metrics_ = java.util.Collections.emptyList();
   }
 
-  @java.lang.Override
+  @Override
   @SuppressWarnings({"unused"})
-  protected java.lang.Object newInstance(
+  protected Object newInstance(
       UnusedPrivateParameter unused) {
     return new MetricMessage();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.aurora.grpc.MetricProto.internal_static_aurora_MetricMessage_descriptor;
+    return MetricProto.internal_static_aurora_MetricMessage_descriptor;
   }
 
-  @java.lang.Override
-  protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  @Override
+  protected FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.aurora.grpc.MetricProto.internal_static_aurora_MetricMessage_fieldAccessorTable
+    return MetricProto.internal_static_aurora_MetricMessage_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.aurora.grpc.MetricMessage.class, com.aurora.grpc.MetricMessage.Builder.class);
+            MetricMessage.class, Builder.class);
   }
 
   public static final int PLACEID_FIELD_NUMBER = 1;
@@ -50,27 +50,27 @@ private static final long serialVersionUID = 0L;
    * <code>int32 placeId = 1;</code>
    * @return The placeId.
    */
-  @java.lang.Override
+  @Override
   public int getPlaceId() {
     return placeId_;
   }
 
   public static final int IP_FIELD_NUMBER = 2;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object ip_ = "";
+  private volatile Object ip_ = "";
   /**
    * <code>string ip = 2;</code>
    * @return The ip.
    */
-  @java.lang.Override
-  public java.lang.String getIp() {
-    java.lang.Object ref = ip_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
+  @Override
+  public String getIp() {
+    Object ref = ip_;
+    if (ref instanceof String) {
+      return (String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
+      String s = bs.toStringUtf8();
       ip_ = s;
       return s;
     }
@@ -79,14 +79,14 @@ private static final long serialVersionUID = 0L;
    * <code>string ip = 2;</code>
    * @return The bytes for ip.
    */
-  @java.lang.Override
+  @Override
   public com.google.protobuf.ByteString
       getIpBytes() {
-    java.lang.Object ref = ip_;
-    if (ref instanceof java.lang.String) {
+    Object ref = ip_;
+    if (ref instanceof String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
+              (String) ref);
       ip_ = b;
       return b;
     } else {
@@ -100,54 +100,65 @@ private static final long serialVersionUID = 0L;
    * <code>int64 time = 3;</code>
    * @return The time.
    */
-  @java.lang.Override
+  @Override
   public long getTime() {
     return time_;
   }
 
-  public static final int METRICS_FIELD_NUMBER = 4;
-  @SuppressWarnings("serial")
-  private java.util.List<com.aurora.grpc.MetricItem> metrics_;
+  public static final int PID_FIELD_NUMBER = 4;
+  private int pid_ = 0;
   /**
-   * <code>repeated .aurora.MetricItem metrics = 4;</code>
+   * <code>int32 pid = 4;</code>
+   * @return The pid.
    */
-  @java.lang.Override
-  public java.util.List<com.aurora.grpc.MetricItem> getMetricsList() {
+  @Override
+  public int getPid() {
+    return pid_;
+  }
+
+  public static final int METRICS_FIELD_NUMBER = 5;
+  @SuppressWarnings("serial")
+  private java.util.List<MetricItem> metrics_;
+  /**
+   * <code>repeated .aurora.MetricItem metrics = 5;</code>
+   */
+  @Override
+  public java.util.List<MetricItem> getMetricsList() {
     return metrics_;
   }
   /**
-   * <code>repeated .aurora.MetricItem metrics = 4;</code>
+   * <code>repeated .aurora.MetricItem metrics = 5;</code>
    */
-  @java.lang.Override
-  public java.util.List<? extends com.aurora.grpc.MetricItemOrBuilder> 
+  @Override
+  public java.util.List<? extends MetricItemOrBuilder>
       getMetricsOrBuilderList() {
     return metrics_;
   }
   /**
-   * <code>repeated .aurora.MetricItem metrics = 4;</code>
+   * <code>repeated .aurora.MetricItem metrics = 5;</code>
    */
-  @java.lang.Override
+  @Override
   public int getMetricsCount() {
     return metrics_.size();
   }
   /**
-   * <code>repeated .aurora.MetricItem metrics = 4;</code>
+   * <code>repeated .aurora.MetricItem metrics = 5;</code>
    */
-  @java.lang.Override
-  public com.aurora.grpc.MetricItem getMetrics(int index) {
+  @Override
+  public MetricItem getMetrics(int index) {
     return metrics_.get(index);
   }
   /**
-   * <code>repeated .aurora.MetricItem metrics = 4;</code>
+   * <code>repeated .aurora.MetricItem metrics = 5;</code>
    */
-  @java.lang.Override
-  public com.aurora.grpc.MetricItemOrBuilder getMetricsOrBuilder(
+  @Override
+  public MetricItemOrBuilder getMetricsOrBuilder(
       int index) {
     return metrics_.get(index);
   }
 
   private byte memoizedIsInitialized = -1;
-  @java.lang.Override
+  @Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -157,7 +168,7 @@ private static final long serialVersionUID = 0L;
     return true;
   }
 
-  @java.lang.Override
+  @Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (placeId_ != 0) {
@@ -169,13 +180,16 @@ private static final long serialVersionUID = 0L;
     if (time_ != 0L) {
       output.writeInt64(3, time_);
     }
+    if (pid_ != 0) {
+      output.writeInt32(4, pid_);
+    }
     for (int i = 0; i < metrics_.size(); i++) {
-      output.writeMessage(4, metrics_.get(i));
+      output.writeMessage(5, metrics_.get(i));
     }
     getUnknownFields().writeTo(output);
   }
 
-  @java.lang.Override
+  @Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -192,24 +206,28 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt64Size(3, time_);
     }
+    if (pid_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(4, pid_);
+    }
     for (int i = 0; i < metrics_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(4, metrics_.get(i));
+        .computeMessageSize(5, metrics_.get(i));
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
   }
 
-  @java.lang.Override
-  public boolean equals(final java.lang.Object obj) {
+  @Override
+  public boolean equals(final Object obj) {
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.aurora.grpc.MetricMessage)) {
+    if (!(obj instanceof MetricMessage)) {
       return super.equals(obj);
     }
-    com.aurora.grpc.MetricMessage other = (com.aurora.grpc.MetricMessage) obj;
+    MetricMessage other = (MetricMessage) obj;
 
     if (getPlaceId()
         != other.getPlaceId()) return false;
@@ -217,13 +235,15 @@ private static final long serialVersionUID = 0L;
         .equals(other.getIp())) return false;
     if (getTime()
         != other.getTime()) return false;
+    if (getPid()
+        != other.getPid()) return false;
     if (!getMetricsList()
         .equals(other.getMetricsList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
 
-  @java.lang.Override
+  @Override
   public int hashCode() {
     if (memoizedHashCode != 0) {
       return memoizedHashCode;
@@ -237,6 +257,8 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + TIME_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         getTime());
+    hash = (37 * hash) + PID_FIELD_NUMBER;
+    hash = (53 * hash) + getPid();
     if (getMetricsCount() > 0) {
       hash = (37 * hash) + METRICS_FIELD_NUMBER;
       hash = (53 * hash) + getMetricsList().hashCode();
@@ -246,44 +268,44 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static com.aurora.grpc.MetricMessage parseFrom(
+  public static MetricMessage parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.aurora.grpc.MetricMessage parseFrom(
+  public static MetricMessage parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.aurora.grpc.MetricMessage parseFrom(
+  public static MetricMessage parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.aurora.grpc.MetricMessage parseFrom(
+  public static MetricMessage parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.aurora.grpc.MetricMessage parseFrom(byte[] data)
+  public static MetricMessage parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.aurora.grpc.MetricMessage parseFrom(
+  public static MetricMessage parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.aurora.grpc.MetricMessage parseFrom(java.io.InputStream input)
+  public static MetricMessage parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.aurora.grpc.MetricMessage parseFrom(
+  public static MetricMessage parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -291,26 +313,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.aurora.grpc.MetricMessage parseDelimitedFrom(java.io.InputStream input)
+  public static MetricMessage parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.aurora.grpc.MetricMessage parseDelimitedFrom(
+  public static MetricMessage parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.aurora.grpc.MetricMessage parseFrom(
+  public static MetricMessage parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.aurora.grpc.MetricMessage parseFrom(
+  public static MetricMessage parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -318,23 +340,23 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  @java.lang.Override
+  @Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.aurora.grpc.MetricMessage prototype) {
+  public static Builder newBuilder(MetricMessage prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
-  @java.lang.Override
+  @Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
   }
 
-  @java.lang.Override
+  @Override
   protected Builder newBuilderForType(
-      com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      BuilderParent parent) {
     Builder builder = new Builder(parent);
     return builder;
   }
@@ -348,18 +370,18 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:aurora.MetricMessage)
-      com.aurora.grpc.MetricMessageOrBuilder {
+      MetricMessageOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.aurora.grpc.MetricProto.internal_static_aurora_MetricMessage_descriptor;
+      return MetricProto.internal_static_aurora_MetricMessage_descriptor;
     }
 
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    @Override
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.aurora.grpc.MetricProto.internal_static_aurora_MetricMessage_fieldAccessorTable
+      return MetricProto.internal_static_aurora_MetricMessage_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.aurora.grpc.MetricMessage.class, com.aurora.grpc.MetricMessage.Builder.class);
+              MetricMessage.class, Builder.class);
     }
 
     // Construct using com.aurora.grpc.MetricMessage.newBuilder()
@@ -368,61 +390,62 @@ private static final long serialVersionUID = 0L;
     }
 
     private Builder(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        BuilderParent parent) {
       super(parent);
 
     }
-    @java.lang.Override
+    @Override
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
       placeId_ = 0;
       ip_ = "";
       time_ = 0L;
+      pid_ = 0;
       if (metricsBuilder_ == null) {
         metrics_ = java.util.Collections.emptyList();
       } else {
         metrics_ = null;
         metricsBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000008);
+      bitField0_ = (bitField0_ & ~0x00000010);
       return this;
     }
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.aurora.grpc.MetricProto.internal_static_aurora_MetricMessage_descriptor;
+      return MetricProto.internal_static_aurora_MetricMessage_descriptor;
     }
 
-    @java.lang.Override
-    public com.aurora.grpc.MetricMessage getDefaultInstanceForType() {
-      return com.aurora.grpc.MetricMessage.getDefaultInstance();
+    @Override
+    public MetricMessage getDefaultInstanceForType() {
+      return MetricMessage.getDefaultInstance();
     }
 
-    @java.lang.Override
-    public com.aurora.grpc.MetricMessage build() {
-      com.aurora.grpc.MetricMessage result = buildPartial();
+    @Override
+    public MetricMessage build() {
+      MetricMessage result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
       return result;
     }
 
-    @java.lang.Override
-    public com.aurora.grpc.MetricMessage buildPartial() {
-      com.aurora.grpc.MetricMessage result = new com.aurora.grpc.MetricMessage(this);
+    @Override
+    public MetricMessage buildPartial() {
+      MetricMessage result = new MetricMessage(this);
       buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartialRepeatedFields(com.aurora.grpc.MetricMessage result) {
+    private void buildPartialRepeatedFields(MetricMessage result) {
       if (metricsBuilder_ == null) {
-        if (((bitField0_ & 0x00000008) != 0)) {
+        if (((bitField0_ & 0x00000010) != 0)) {
           metrics_ = java.util.Collections.unmodifiableList(metrics_);
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.metrics_ = metrics_;
       } else {
@@ -430,7 +453,7 @@ private static final long serialVersionUID = 0L;
       }
     }
 
-    private void buildPartial0(com.aurora.grpc.MetricMessage result) {
+    private void buildPartial0(MetricMessage result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.placeId_ = placeId_;
@@ -441,52 +464,55 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.time_ = time_;
       }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.pid_ = pid_;
+      }
     }
 
-    @java.lang.Override
+    @Override
     public Builder clone() {
       return super.clone();
     }
-    @java.lang.Override
+    @Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
+        Object value) {
       return super.setField(field, value);
     }
-    @java.lang.Override
+    @Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
       return super.clearField(field);
     }
-    @java.lang.Override
+    @Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
       return super.clearOneof(oneof);
     }
-    @java.lang.Override
+    @Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
+        int index, Object value) {
       return super.setRepeatedField(field, index, value);
     }
-    @java.lang.Override
+    @Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
+        Object value) {
       return super.addRepeatedField(field, value);
     }
-    @java.lang.Override
+    @Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.aurora.grpc.MetricMessage) {
-        return mergeFrom((com.aurora.grpc.MetricMessage)other);
+      if (other instanceof MetricMessage) {
+        return mergeFrom((MetricMessage)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.aurora.grpc.MetricMessage other) {
-      if (other == com.aurora.grpc.MetricMessage.getDefaultInstance()) return this;
+    public Builder mergeFrom(MetricMessage other) {
+      if (other == MetricMessage.getDefaultInstance()) return this;
       if (other.getPlaceId() != 0) {
         setPlaceId(other.getPlaceId());
       }
@@ -498,11 +524,14 @@ private static final long serialVersionUID = 0L;
       if (other.getTime() != 0L) {
         setTime(other.getTime());
       }
+      if (other.getPid() != 0) {
+        setPid(other.getPid());
+      }
       if (metricsBuilder_ == null) {
         if (!other.metrics_.isEmpty()) {
           if (metrics_.isEmpty()) {
             metrics_ = other.metrics_;
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000010);
           } else {
             ensureMetricsIsMutable();
             metrics_.addAll(other.metrics_);
@@ -515,7 +544,7 @@ private static final long serialVersionUID = 0L;
             metricsBuilder_.dispose();
             metricsBuilder_ = null;
             metrics_ = other.metrics_;
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000010);
             metricsBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                  getMetricsFieldBuilder() : null;
@@ -529,18 +558,18 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    @java.lang.Override
+    @Override
     public final boolean isInitialized() {
       return true;
     }
 
-    @java.lang.Override
+    @Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
+        throw new NullPointerException();
       }
       try {
         boolean done = false;
@@ -565,10 +594,15 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000004;
               break;
             } // case 24
-            case 34: {
-              com.aurora.grpc.MetricItem m =
+            case 32: {
+              pid_ = input.readInt32();
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 32
+            case 42: {
+              MetricItem m =
                   input.readMessage(
-                      com.aurora.grpc.MetricItem.parser(),
+                      MetricItem.parser(),
                       extensionRegistry);
               if (metricsBuilder_ == null) {
                 ensureMetricsIsMutable();
@@ -577,7 +611,7 @@ private static final long serialVersionUID = 0L;
                 metricsBuilder_.addMessage(m);
               }
               break;
-            } // case 34
+            } // case 42
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -600,7 +634,7 @@ private static final long serialVersionUID = 0L;
      * <code>int32 placeId = 1;</code>
      * @return The placeId.
      */
-    @java.lang.Override
+    @Override
     public int getPlaceId() {
       return placeId_;
     }
@@ -627,21 +661,21 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object ip_ = "";
+    private Object ip_ = "";
     /**
      * <code>string ip = 2;</code>
      * @return The ip.
      */
-    public java.lang.String getIp() {
-      java.lang.Object ref = ip_;
-      if (!(ref instanceof java.lang.String)) {
+    public String getIp() {
+      Object ref = ip_;
+      if (!(ref instanceof String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         ip_ = s;
         return s;
       } else {
-        return (java.lang.String) ref;
+        return (String) ref;
       }
     }
     /**
@@ -650,11 +684,11 @@ private static final long serialVersionUID = 0L;
      */
     public com.google.protobuf.ByteString
         getIpBytes() {
-      java.lang.Object ref = ip_;
+      Object ref = ip_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         ip_ = b;
         return b;
       } else {
@@ -667,7 +701,7 @@ private static final long serialVersionUID = 0L;
      * @return This builder for chaining.
      */
     public Builder setIp(
-        java.lang.String value) {
+        String value) {
       if (value == null) { throw new NullPointerException(); }
       ip_ = value;
       bitField0_ |= 0x00000002;
@@ -704,7 +738,7 @@ private static final long serialVersionUID = 0L;
      * <code>int64 time = 3;</code>
      * @return The time.
      */
-    @java.lang.Override
+    @Override
     public long getTime() {
       return time_;
     }
@@ -731,22 +765,54 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.util.List<com.aurora.grpc.MetricItem> metrics_ =
+    private int pid_ ;
+    /**
+     * <code>int32 pid = 4;</code>
+     * @return The pid.
+     */
+    @Override
+    public int getPid() {
+      return pid_;
+    }
+    /**
+     * <code>int32 pid = 4;</code>
+     * @param value The pid to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPid(int value) {
+
+      pid_ = value;
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 pid = 4;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearPid() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      pid_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private java.util.List<MetricItem> metrics_ =
       java.util.Collections.emptyList();
     private void ensureMetricsIsMutable() {
-      if (!((bitField0_ & 0x00000008) != 0)) {
-        metrics_ = new java.util.ArrayList<com.aurora.grpc.MetricItem>(metrics_);
-        bitField0_ |= 0x00000008;
+      if (!((bitField0_ & 0x00000010) != 0)) {
+        metrics_ = new java.util.ArrayList<MetricItem>(metrics_);
+        bitField0_ |= 0x00000010;
        }
     }
 
     private com.google.protobuf.RepeatedFieldBuilderV3<
-        com.aurora.grpc.MetricItem, com.aurora.grpc.MetricItem.Builder, com.aurora.grpc.MetricItemOrBuilder> metricsBuilder_;
+        MetricItem, MetricItem.Builder, MetricItemOrBuilder> metricsBuilder_;
 
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
-    public java.util.List<com.aurora.grpc.MetricItem> getMetricsList() {
+    public java.util.List<MetricItem> getMetricsList() {
       if (metricsBuilder_ == null) {
         return java.util.Collections.unmodifiableList(metrics_);
       } else {
@@ -754,7 +820,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
     public int getMetricsCount() {
       if (metricsBuilder_ == null) {
@@ -764,9 +830,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
-    public com.aurora.grpc.MetricItem getMetrics(int index) {
+    public MetricItem getMetrics(int index) {
       if (metricsBuilder_ == null) {
         return metrics_.get(index);
       } else {
@@ -774,10 +840,10 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
     public Builder setMetrics(
-        int index, com.aurora.grpc.MetricItem value) {
+        int index, MetricItem value) {
       if (metricsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -791,10 +857,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
     public Builder setMetrics(
-        int index, com.aurora.grpc.MetricItem.Builder builderForValue) {
+        int index, MetricItem.Builder builderForValue) {
       if (metricsBuilder_ == null) {
         ensureMetricsIsMutable();
         metrics_.set(index, builderForValue.build());
@@ -805,9 +871,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
-    public Builder addMetrics(com.aurora.grpc.MetricItem value) {
+    public Builder addMetrics(MetricItem value) {
       if (metricsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -821,10 +887,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
     public Builder addMetrics(
-        int index, com.aurora.grpc.MetricItem value) {
+        int index, MetricItem value) {
       if (metricsBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
@@ -838,10 +904,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
     public Builder addMetrics(
-        com.aurora.grpc.MetricItem.Builder builderForValue) {
+        MetricItem.Builder builderForValue) {
       if (metricsBuilder_ == null) {
         ensureMetricsIsMutable();
         metrics_.add(builderForValue.build());
@@ -852,10 +918,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
     public Builder addMetrics(
-        int index, com.aurora.grpc.MetricItem.Builder builderForValue) {
+        int index, MetricItem.Builder builderForValue) {
       if (metricsBuilder_ == null) {
         ensureMetricsIsMutable();
         metrics_.add(index, builderForValue.build());
@@ -866,10 +932,10 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
     public Builder addAllMetrics(
-        java.lang.Iterable<? extends com.aurora.grpc.MetricItem> values) {
+        Iterable<? extends MetricItem> values) {
       if (metricsBuilder_ == null) {
         ensureMetricsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -881,12 +947,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
     public Builder clearMetrics() {
       if (metricsBuilder_ == null) {
         metrics_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
       } else {
         metricsBuilder_.clear();
@@ -894,7 +960,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
     public Builder removeMetrics(int index) {
       if (metricsBuilder_ == null) {
@@ -907,16 +973,16 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
-    public com.aurora.grpc.MetricItem.Builder getMetricsBuilder(
+    public MetricItem.Builder getMetricsBuilder(
         int index) {
       return getMetricsFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
-    public com.aurora.grpc.MetricItemOrBuilder getMetricsOrBuilder(
+    public MetricItemOrBuilder getMetricsOrBuilder(
         int index) {
       if (metricsBuilder_ == null) {
         return metrics_.get(index);  } else {
@@ -924,9 +990,9 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
-    public java.util.List<? extends com.aurora.grpc.MetricItemOrBuilder> 
+    public java.util.List<? extends MetricItemOrBuilder>
          getMetricsOrBuilderList() {
       if (metricsBuilder_ != null) {
         return metricsBuilder_.getMessageOrBuilderList();
@@ -935,48 +1001,48 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
-    public com.aurora.grpc.MetricItem.Builder addMetricsBuilder() {
+    public MetricItem.Builder addMetricsBuilder() {
       return getMetricsFieldBuilder().addBuilder(
-          com.aurora.grpc.MetricItem.getDefaultInstance());
+          MetricItem.getDefaultInstance());
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
-    public com.aurora.grpc.MetricItem.Builder addMetricsBuilder(
+    public MetricItem.Builder addMetricsBuilder(
         int index) {
       return getMetricsFieldBuilder().addBuilder(
-          index, com.aurora.grpc.MetricItem.getDefaultInstance());
+          index, MetricItem.getDefaultInstance());
     }
     /**
-     * <code>repeated .aurora.MetricItem metrics = 4;</code>
+     * <code>repeated .aurora.MetricItem metrics = 5;</code>
      */
-    public java.util.List<com.aurora.grpc.MetricItem.Builder> 
+    public java.util.List<MetricItem.Builder>
          getMetricsBuilderList() {
       return getMetricsFieldBuilder().getBuilderList();
     }
     private com.google.protobuf.RepeatedFieldBuilderV3<
-        com.aurora.grpc.MetricItem, com.aurora.grpc.MetricItem.Builder, com.aurora.grpc.MetricItemOrBuilder> 
+        MetricItem, MetricItem.Builder, MetricItemOrBuilder>
         getMetricsFieldBuilder() {
       if (metricsBuilder_ == null) {
         metricsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-            com.aurora.grpc.MetricItem, com.aurora.grpc.MetricItem.Builder, com.aurora.grpc.MetricItemOrBuilder>(
+            MetricItem, MetricItem.Builder, MetricItemOrBuilder>(
                 metrics_,
-                ((bitField0_ & 0x00000008) != 0),
+                ((bitField0_ & 0x00000010) != 0),
                 getParentForChildren(),
                 isClean());
         metrics_ = null;
       }
       return metricsBuilder_;
     }
-    @java.lang.Override
+    @Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.setUnknownFields(unknownFields);
     }
 
-    @java.lang.Override
+    @Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
@@ -987,18 +1053,18 @@ private static final long serialVersionUID = 0L;
   }
 
   // @@protoc_insertion_point(class_scope:aurora.MetricMessage)
-  private static final com.aurora.grpc.MetricMessage DEFAULT_INSTANCE;
+  private static final MetricMessage DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.aurora.grpc.MetricMessage();
+    DEFAULT_INSTANCE = new MetricMessage();
   }
 
-  public static com.aurora.grpc.MetricMessage getDefaultInstance() {
+  public static MetricMessage getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
   private static final com.google.protobuf.Parser<MetricMessage>
       PARSER = new com.google.protobuf.AbstractParser<MetricMessage>() {
-    @java.lang.Override
+    @Override
     public MetricMessage parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1022,13 +1088,13 @@ private static final long serialVersionUID = 0L;
     return PARSER;
   }
 
-  @java.lang.Override
+  @Override
   public com.google.protobuf.Parser<MetricMessage> getParserForType() {
     return PARSER;
   }
 
-  @java.lang.Override
-  public com.aurora.grpc.MetricMessage getDefaultInstanceForType() {
+  @Override
+  public MetricMessage getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

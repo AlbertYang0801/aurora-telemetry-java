@@ -31,28 +31,13 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
-        <!--clickhouse-->
+        <!--clickhouse-http-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ru.yandex.clickhouse</groupId>
-            <artifactId>clickhouse-jdbc</artifactId>
-            <version>0.1.52</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.0</version>
+            <groupId>com.clickhouse</groupId>
+            <artifactId>client-v2</artifactId>
+            <version>0.8.2</version>
         </dependency>
 
-        <!--apache的httpClient依赖-->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.1</version>
-        </dependency>
         <!-- Protobuf 编译 -->
         <dependency>
             <groupId>com.google.protobuf</groupId>

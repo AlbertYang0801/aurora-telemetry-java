@@ -1,16 +1,4 @@
 spring:
-  datasource:
-    clickhouse:
-      url: jdbc:clickhouse://118.25.129.41:8123/test_db
-      username: test
-      password: 123456
-      driver-class-name: ru.yandex.clickhouse.ClickHouseDriver
-      initialization-mode: always
-      hikari:
-        maximum-pool-size: 10
-        minimum-idle: 2
-
-
   kafka:
     bootstrap-servers: 118.25.129.41:9092
     consumer:
@@ -37,3 +25,17 @@ kafka:
     # metric topic对应的消费线程池大小
     metric-thread-pool-size: 10
 
+
+clickhouse:
+  url: http://118.25.129.41:8123/
+  username: test
+  password: 123456
+  database: test-db
+  socket-timeout: 30000
+  connection-timeout: 5000
+  # clickhouse写入线程池的核心线程数
+  core-thread-size: 5
+  # clickhouse写入线程池的最大线程数
+  max-thread-size: 10
+  # clickhouse写入线程池的队列大小
+  max-queue-size: 100

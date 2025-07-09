@@ -1,7 +1,10 @@
 package com.aurora.processor;
 
 import cn.hutool.core.thread.NamedThreadFactory;
-import com.aurora.config.KafkaCustomConfig;
+import com.aurora.clickhouse.ClickHouseDataBuffer;
+import com.aurora.clickhouse.DataBuffer;
+import com.aurora.config.KafkaCustomProperties;
+import com.aurora.entity.BaseMetric;
 import com.aurora.service.MetricService;
 import com.aurora.handler.BlockReceiverRejectionHandler;
 import org.apache.logging.log4j.LogManager;
@@ -24,16 +27,18 @@ public class MetricDataProcessor extends DataProcessor {
     private static final Logger logger = LogManager.getLogger(MetricDataProcessor.class);
 
     @Resource
-    KafkaCustomConfig kafkaCustomConfig;
+    KafkaCustomProperties kafkaCustomProperties;
     @Resource
     KafkaProperties kafkaProperties;
 
     private static ThreadPoolExecutor executor;
 
+    private DataBuffer<BaseMetric> dataBuffer;
+
     protected void initializeThreadPool() {
         try {
-            executor = new ThreadPoolExecutor(kafkaCustomConfig.getMetricThreadPoolSize(),
-                    kafkaCustomConfig.getMetricThreadPoolSize(),
+            executor = new ThreadPoolExecutor(kafkaCustomProperties.getMetricThreadPoolSize(),
+                    kafkaCustomProperties.getMetricThreadPoolSize(),
                     0, TimeUnit.MILLISECONDS,
                     //队列容量为单次最大拉取消息数量
                     new LinkedBlockingQueue<>(kafkaProperties.getConsumer().getMaxPollRecords()),
