@@ -20,22 +20,18 @@ kafka:
     sasl-mechanism: SCRAM-SHA-256
     # 授权信息
     sasl-jaas-config: org.apache.kafka.common.security.scram.ScramLoginModule required username=\"admin\" password=\"adminpwd\";
+    # 消费线程池大小
+    consumer-thread-pool-size: 10
     # 指标topic
     metric-topic: metric
-    # metric topic对应的消费线程池大小
-    metric-thread-pool-size: 10
+
 
 
 clickhouse:
   url: http://118.25.129.41:8123/
   username: test
   password: 123456
-  database: test-db
+  database: test_db
   socket-timeout: 30000
   connection-timeout: 5000
-  # clickhouse写入线程池的核心线程数
-  core-thread-size: 5
-  # clickhouse写入线程池的最大线程数
-  max-thread-size: 10
-  # clickhouse写入线程池的队列大小
-  max-queue-size: 100
+

@@ -87,7 +87,7 @@ public class KafkaCustomReceiver {
                     for (ConsumerRecord<String, byte[]> record : records) {
                         //根据topic选择processor
                         DataProcessor processor = kafkaProcessorFactory.getProcessor(record.topic());
-                        processor.process(record.value());
+                        processor.processData(record.value());
                         count++;
                     }
                 } catch (Throwable exception) {
@@ -100,7 +100,8 @@ public class KafkaCustomReceiver {
     }
 
     private int processorRemainingCapacity() {
-        return kafkaProcessorFactory.allRemainingCapacity();
+        //线程池剩余容量
+        return DataProcessor.remainingCapacity();
     }
 
     private void countMessage() {

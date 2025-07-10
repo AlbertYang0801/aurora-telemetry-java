@@ -1,7 +1,6 @@
 package com.aurora.clickhouse;
 
 import cn.hutool.core.collection.CollUtil;
-import com.aurora.clickhouse.task.BaseFlushTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +30,7 @@ public class DataBuffer<T> {
      */
     private final AtomicInteger elapsedTime;
 
-    private final BaseFlushTask<T> flushTask;
+    private final FlushTask<T> flushTask;
 
     private final int flushSize;
 
@@ -41,7 +40,7 @@ public class DataBuffer<T> {
      * @param flushSize        队列达到批次大小进行刷新
      * @param flushTimeSeconds 经过指定时间写入数据
      */
-    public DataBuffer(BaseFlushTask<T> flushTask, int flushSize, int flushTimeSeconds) {
+    public DataBuffer(FlushTask<T> flushTask, int flushSize, int flushTimeSeconds) {
         this.flushTask = flushTask;
         this.flushSize = flushSize;
         this.flushTime = flushTimeSeconds;
@@ -95,6 +94,10 @@ public class DataBuffer<T> {
             flushTask.run(buffer);
         }
         elapsedTime.set(0);
+    }
+
+    public void flushAll(){
+        flushBuffer();
     }
 
 

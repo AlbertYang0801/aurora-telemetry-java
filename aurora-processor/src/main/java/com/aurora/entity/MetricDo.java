@@ -1,17 +1,18 @@
 package com.aurora.entity;
 
+import com.aurora.clickhouse.ClickHouseTable;
 import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * @author yangjunwei
  * @date 2025/7/8 18:22
  */
 @Data
-public class MetricDo extends BaseMetric implements Serializable {
+@ClickHouseTable(value = "metric_data")
+public class MetricDo extends BaseClickhouseData implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1251213123L;
@@ -27,5 +28,7 @@ public class MetricDo extends BaseMetric implements Serializable {
     private Integer pid;
 
     private Double value;
+
+
 
 }

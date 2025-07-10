@@ -1,9 +1,8 @@
-package com.aurora.clickhouse.task;
+package com.aurora.clickhouse;
 
 import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.aurora.clickhouse.ClickHouseInsertHandler;
 import com.aurora.enums.ClickHouseDataType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +15,14 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author AlbertYang
  */
-public abstract class BaseFlushTask<T> {
+public class FlushTask<T> {
 
-    protected static final Logger logger = LoggerFactory.getLogger(BaseFlushTask.class);
+    protected static final Logger logger = LoggerFactory.getLogger(FlushTask.class);
 
-    protected BaseFlushTask() {
+    private final ClickHouseDataType clickHouseDataType;
+
+    protected FlushTask(ClickHouseDataType clickHouseDataType) {
+        this.clickHouseDataType = clickHouseDataType;
     }
 
     /**
@@ -31,6 +33,7 @@ public abstract class BaseFlushTask<T> {
             .setCorePoolSize(5)
             .setMaxPoolSize(10)
             .setKeepAliveTime(1, TimeUnit.MINUTES)
+            //根据buffer数量调整
             .setWorkQueue(new LinkedBlockingQueue<>(20))
             .setThreadFactory(ThreadUtil.newNamedThreadFactory("clickhouse-flush-job", false))
             .setHandler((r, executor) -> {
@@ -48,14 +51,12 @@ public abstract class BaseFlushTask<T> {
         EXECUTOR.execute(new Runnable() {
             @Override
             public void run() {
-                //批量写入
-                long insertSize = SpringUtil.getBean(ClickHouseInsertHandler.class).batchInsert(getClickHouseDataType().getTableName(), data, 500);
-                logger.debug(getClickHouseDataType().getTableName() + " insert to clickhouse {} items , success {} items", data.size(), insertSize);
+                //批量写入clickhouse
+                long insertSize = SpringUtil.getBean(ClickHouseInsertHandler.class).batchInsert(clickHouseDataType.getTableName(), data, 500);
+                logger.debug(clickHouseDataType.getTableName() + " insert to clickhouse {} items , success {} items", data.size(), insertSize);
             }
         });
     }
-
-    protected abstract ClickHouseDataType getClickHouseDataType();
 
 
 }

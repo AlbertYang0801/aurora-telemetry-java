@@ -20,10 +20,9 @@ public class KafkaCustomProperties {
 
     private String saslJaasConfig;
 
-    private KafkaProperties.Consumer consumer;
+    private Integer consumerThreadPoolSize;
 
     private String metricTopic;
 
-    private Integer metricThreadPoolSize;
 
 }

@@ -25,11 +25,5 @@ public class ClickHouseProperties {
 
     private int connectionTimeout;
 
-    private int coreThreadSize;
-
-    private int maxThreadSize;
-
-    private int maxQueueSize;
-
 
 }

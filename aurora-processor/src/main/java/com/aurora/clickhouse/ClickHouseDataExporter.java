@@ -1,6 +1,6 @@
 package com.aurora.clickhouse;
 
-import com.aurora.entity.BaseMetric;
+import com.aurora.entity.BaseClickhouseData;
 import com.aurora.enums.ClickHouseDataType;
 import org.springframework.stereotype.Component;
 
@@ -13,18 +13,22 @@ import java.util.List;
 @Component
 public class ClickHouseDataExporter {
 
-    private ClickHouseDataBuffer clickHouseDataBuffer;
+    private final ClickHouseDataBuffer buffer;
 
-    public ClickHouseDataExporter() {
-        this.clickHouseDataBuffer = new ClickHouseDataBuffer();
+    /**
+     * Spring注入保证buffer单例
+     * @param clickHouseDataBuffer
+     */
+    public ClickHouseDataExporter(ClickHouseDataBuffer clickHouseDataBuffer) {
+        this.buffer = clickHouseDataBuffer;
     }
 
-    public void export(BaseMetric metric, ClickHouseDataType type) {
-        clickHouseDataBuffer.insertData(metric, type);
+    public void export(BaseClickhouseData metric, ClickHouseDataType type) {
+        buffer.insertData(metric, type);
     }
 
-    public void exportBatch(List<? extends BaseMetric> metrics, ClickHouseDataType type) {
-        metrics.forEach(metric -> clickHouseDataBuffer.insertData(metric, type));
+    public void exportBatch(List<? extends BaseClickhouseData> metrics, ClickHouseDataType type) {
+        metrics.forEach(metric -> buffer.insertData(metric, type));
     }
 
 
