@@ -1,8 +1,8 @@
 package com.aurora.service;
 
-import com.systemdata.grpc.DeviceMetricAck;
-import com.systemdata.grpc.DeviceMetricMessage;
-import com.systemdata.grpc.DeviceMetricServiceGrpc;
+import com.aurora.grpc.DeviceMetricAck;
+import com.aurora.grpc.DeviceMetricMessage;
+import com.aurora.grpc.DeviceMetricServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;

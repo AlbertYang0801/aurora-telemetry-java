@@ -1,10 +1,9 @@
 package com.aurora;
 
-import com.aurora.grpc.*;
-import com.systemdata.grpc.DeviceMetricAck;
-import com.systemdata.grpc.DeviceMetricItem;
-import com.systemdata.grpc.DeviceMetricMessage;
-import com.systemdata.grpc.DeviceMetricServiceGrpc;
+import com.aurora.grpc.DeviceMetricAck;
+import com.aurora.grpc.DeviceMetricItem;
+import com.aurora.grpc.DeviceMetricMessage;
+import com.aurora.grpc.DeviceMetricServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;

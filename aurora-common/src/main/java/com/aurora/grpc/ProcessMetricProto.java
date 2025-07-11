@@ -38,17 +38,16 @@ public final class ProcessMetricProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023processmetric.proto\022\006aurora\"\211\001\n\024Proces" +
-      "sMetricMessage\022\017\n\007placeId\030\001 \001(\005\022\n\n\002ip\030\002 " +
-      "\001(\t\022\014\n\004time\030\003 \001(\003\022\r\n\005cFlag\030\004 \001(\005\022\013\n\003xid\030" +
-      "\005 \001(\005\022*\n\007metrics\030\006 \003(\0132\031.aurora.ProcessM" +
-      "etricItem\"/\n\021ProcessMetricItem\022\013\n\003tid\030\007 " +
-      "\001(\005\022\r\n\005value\030\010 \001(\001\"1\n\020ProcessMetricAck\022\014" +
-      "\n\004code\030\001 \001(\005\022\017\n\007message\030\002 \001(\t2Z\n\024Process" +
-      "MetricService\022B\n\006Report\022\034.aurora.Process" +
-      "MetricMessage\032\030.aurora.ProcessMetricAck(" +
-      "\001B\'\n\017com.aurora.grpcB\022ProcessMetricProto" +
-      "P\001b\006proto3"
+      "\n\023processmetric.proto\022\006aurora\"z\n\024Process" +
+      "MetricMessage\022\017\n\007placeId\030\001 \001(\005\022\n\n\002ip\030\002 \001" +
+      "(\t\022\014\n\004time\030\003 \001(\003\022\013\n\003pid\030\004 \001(\005\022*\n\007metrics" +
+      "\030\005 \003(\0132\031.aurora.ProcessMetricItem\"/\n\021Pro" +
+      "cessMetricItem\022\013\n\003tid\030\006 \001(\005\022\r\n\005value\030\007 \001" +
+      "(\001\"1\n\020ProcessMetricAck\022\014\n\004code\030\001 \001(\005\022\017\n\007" +
+      "message\030\002 \001(\t2Z\n\024ProcessMetricService\022B\n" +
+      "\006Report\022\034.aurora.ProcessMetricMessage\032\030." +
+      "aurora.ProcessMetricAck(\001B\'\n\017com.aurora." +
+      "grpcB\022ProcessMetricProtoP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -59,7 +58,7 @@ public final class ProcessMetricProto {
     internal_static_aurora_ProcessMetricMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_aurora_ProcessMetricMessage_descriptor,
-        new java.lang.String[] { "PlaceId", "Ip", "Time", "CFlag", "Xid", "Metrics", });
+        new java.lang.String[] { "PlaceId", "Ip", "Time", "Pid", "Metrics", });
     internal_static_aurora_ProcessMetricItem_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_aurora_ProcessMetricItem_fieldAccessorTable = new

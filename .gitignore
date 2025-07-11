@@ -25,3 +25,4 @@ replay_pid*
 /aurora-translator/target/
 /aurora-processor/target/
 /aurora-alert/target/
+/aurora-common/target/

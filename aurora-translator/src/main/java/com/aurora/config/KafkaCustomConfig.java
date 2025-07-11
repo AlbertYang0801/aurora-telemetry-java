@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Configuration;
 @Data
 public class KafkaCustomConfig {
 
-    private String metricTopic;
+    private String deviceMetricTopic;
+
+    private String processMetricTopic;
+
 
 }

@@ -32,37 +32,31 @@ public interface ProcessMetricMessageOrBuilder extends
   long getTime();
 
   /**
-   * <code>int32 cFlag = 4;</code>
-   * @return The cFlag.
+   * <code>int32 pid = 4;</code>
+   * @return The pid.
    */
-  int getCFlag();
+  int getPid();
 
   /**
-   * <code>int32 xid = 5;</code>
-   * @return The xid.
-   */
-  int getXid();
-
-  /**
-   * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+   * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
    */
   java.util.List<com.aurora.grpc.ProcessMetricItem> 
       getMetricsList();
   /**
-   * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+   * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
    */
   com.aurora.grpc.ProcessMetricItem getMetrics(int index);
   /**
-   * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+   * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
    */
   int getMetricsCount();
   /**
-   * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+   * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
    */
   java.util.List<? extends com.aurora.grpc.ProcessMetricItemOrBuilder> 
       getMetricsOrBuilderList();
   /**
-   * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+   * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
    */
   com.aurora.grpc.ProcessMetricItemOrBuilder getMetricsOrBuilder(
       int index);

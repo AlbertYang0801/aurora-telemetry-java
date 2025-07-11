@@ -1,25 +1,26 @@
 syntax = "proto3";
 
-package systemdata;
+package metric;
 
 option csharp_namespace = "SystemData.Grpc";
 option java_multiple_files = true;
-option java_package = "com.systemdata.grpc";
+option java_package = "com.aurora.grpc";
 
-// 现有的设备指标消息...
+//设备指标
 service DeviceMetricService {
   rpc Report(stream DeviceMetricMessage) returns (DeviceMetricAck);
 }
 
+//设备基础信息
 message DeviceMetricMessage {
   int32 placeId = 1;
   string ip = 2;
   int64 time = 3;
-  int32 cFlag = 4;
   repeated DeviceMetricItem metrics = 5;
-  
+
 }
 
+//指标项和指标值
 message DeviceMetricItem {
   int32 tid = 6;
   double value = 7;

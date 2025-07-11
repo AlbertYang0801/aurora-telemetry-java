@@ -5,7 +5,7 @@ package com.aurora.grpc;
 
 /**
  * <pre>
- * 新增消息结构：用于完整映射原始JSON
+ *进程指标
  * </pre>
  *
  * Protobuf type {@code aurora.ProcessMetricMessage}
@@ -105,40 +105,29 @@ private static final long serialVersionUID = 0L;
     return time_;
   }
 
-  public static final int CFLAG_FIELD_NUMBER = 4;
-  private int cFlag_ = 0;
+  public static final int PID_FIELD_NUMBER = 4;
+  private int pid_ = 0;
   /**
-   * <code>int32 cFlag = 4;</code>
-   * @return The cFlag.
+   * <code>int32 pid = 4;</code>
+   * @return The pid.
    */
   @java.lang.Override
-  public int getCFlag() {
-    return cFlag_;
+  public int getPid() {
+    return pid_;
   }
 
-  public static final int XID_FIELD_NUMBER = 5;
-  private int xid_ = 0;
-  /**
-   * <code>int32 xid = 5;</code>
-   * @return The xid.
-   */
-  @java.lang.Override
-  public int getXid() {
-    return xid_;
-  }
-
-  public static final int METRICS_FIELD_NUMBER = 6;
+  public static final int METRICS_FIELD_NUMBER = 5;
   @SuppressWarnings("serial")
   private java.util.List<com.aurora.grpc.ProcessMetricItem> metrics_;
   /**
-   * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+   * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
    */
   @java.lang.Override
   public java.util.List<com.aurora.grpc.ProcessMetricItem> getMetricsList() {
     return metrics_;
   }
   /**
-   * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+   * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
    */
   @java.lang.Override
   public java.util.List<? extends com.aurora.grpc.ProcessMetricItemOrBuilder> 
@@ -146,21 +135,21 @@ private static final long serialVersionUID = 0L;
     return metrics_;
   }
   /**
-   * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+   * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
    */
   @java.lang.Override
   public int getMetricsCount() {
     return metrics_.size();
   }
   /**
-   * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+   * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
    */
   @java.lang.Override
   public com.aurora.grpc.ProcessMetricItem getMetrics(int index) {
     return metrics_.get(index);
   }
   /**
-   * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+   * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
    */
   @java.lang.Override
   public com.aurora.grpc.ProcessMetricItemOrBuilder getMetricsOrBuilder(
@@ -191,14 +180,11 @@ private static final long serialVersionUID = 0L;
     if (time_ != 0L) {
       output.writeInt64(3, time_);
     }
-    if (cFlag_ != 0) {
-      output.writeInt32(4, cFlag_);
-    }
-    if (xid_ != 0) {
-      output.writeInt32(5, xid_);
+    if (pid_ != 0) {
+      output.writeInt32(4, pid_);
     }
     for (int i = 0; i < metrics_.size(); i++) {
-      output.writeMessage(6, metrics_.get(i));
+      output.writeMessage(5, metrics_.get(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -220,17 +206,13 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt64Size(3, time_);
     }
-    if (cFlag_ != 0) {
+    if (pid_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(4, cFlag_);
-    }
-    if (xid_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(5, xid_);
+        .computeInt32Size(4, pid_);
     }
     for (int i = 0; i < metrics_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(6, metrics_.get(i));
+        .computeMessageSize(5, metrics_.get(i));
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -253,10 +235,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getIp())) return false;
     if (getTime()
         != other.getTime()) return false;
-    if (getCFlag()
-        != other.getCFlag()) return false;
-    if (getXid()
-        != other.getXid()) return false;
+    if (getPid()
+        != other.getPid()) return false;
     if (!getMetricsList()
         .equals(other.getMetricsList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
@@ -277,10 +257,8 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + TIME_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         getTime());
-    hash = (37 * hash) + CFLAG_FIELD_NUMBER;
-    hash = (53 * hash) + getCFlag();
-    hash = (37 * hash) + XID_FIELD_NUMBER;
-    hash = (53 * hash) + getXid();
+    hash = (37 * hash) + PID_FIELD_NUMBER;
+    hash = (53 * hash) + getPid();
     if (getMetricsCount() > 0) {
       hash = (37 * hash) + METRICS_FIELD_NUMBER;
       hash = (53 * hash) + getMetricsList().hashCode();
@@ -384,7 +362,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * 新增消息结构：用于完整映射原始JSON
+   *进程指标
    * </pre>
    *
    * Protobuf type {@code aurora.ProcessMetricMessage}
@@ -423,15 +401,14 @@ private static final long serialVersionUID = 0L;
       placeId_ = 0;
       ip_ = "";
       time_ = 0L;
-      cFlag_ = 0;
-      xid_ = 0;
+      pid_ = 0;
       if (metricsBuilder_ == null) {
         metrics_ = java.util.Collections.emptyList();
       } else {
         metrics_ = null;
         metricsBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000010);
       return this;
     }
 
@@ -466,9 +443,9 @@ private static final long serialVersionUID = 0L;
 
     private void buildPartialRepeatedFields(com.aurora.grpc.ProcessMetricMessage result) {
       if (metricsBuilder_ == null) {
-        if (((bitField0_ & 0x00000020) != 0)) {
+        if (((bitField0_ & 0x00000010) != 0)) {
           metrics_ = java.util.Collections.unmodifiableList(metrics_);
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.metrics_ = metrics_;
       } else {
@@ -488,10 +465,7 @@ private static final long serialVersionUID = 0L;
         result.time_ = time_;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.cFlag_ = cFlag_;
-      }
-      if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.xid_ = xid_;
+        result.pid_ = pid_;
       }
     }
 
@@ -550,17 +524,14 @@ private static final long serialVersionUID = 0L;
       if (other.getTime() != 0L) {
         setTime(other.getTime());
       }
-      if (other.getCFlag() != 0) {
-        setCFlag(other.getCFlag());
-      }
-      if (other.getXid() != 0) {
-        setXid(other.getXid());
+      if (other.getPid() != 0) {
+        setPid(other.getPid());
       }
       if (metricsBuilder_ == null) {
         if (!other.metrics_.isEmpty()) {
           if (metrics_.isEmpty()) {
             metrics_ = other.metrics_;
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000010);
           } else {
             ensureMetricsIsMutable();
             metrics_.addAll(other.metrics_);
@@ -573,7 +544,7 @@ private static final long serialVersionUID = 0L;
             metricsBuilder_.dispose();
             metricsBuilder_ = null;
             metrics_ = other.metrics_;
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000010);
             metricsBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                  getMetricsFieldBuilder() : null;
@@ -624,16 +595,11 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 24
             case 32: {
-              cFlag_ = input.readInt32();
+              pid_ = input.readInt32();
               bitField0_ |= 0x00000008;
               break;
             } // case 32
-            case 40: {
-              xid_ = input.readInt32();
-              bitField0_ |= 0x00000010;
-              break;
-            } // case 40
-            case 50: {
+            case 42: {
               com.aurora.grpc.ProcessMetricItem m =
                   input.readMessage(
                       com.aurora.grpc.ProcessMetricItem.parser(),
@@ -645,7 +611,7 @@ private static final long serialVersionUID = 0L;
                 metricsBuilder_.addMessage(m);
               }
               break;
-            } // case 50
+            } // case 42
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -799,66 +765,34 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int cFlag_ ;
+    private int pid_ ;
     /**
-     * <code>int32 cFlag = 4;</code>
-     * @return The cFlag.
+     * <code>int32 pid = 4;</code>
+     * @return The pid.
      */
     @java.lang.Override
-    public int getCFlag() {
-      return cFlag_;
+    public int getPid() {
+      return pid_;
     }
     /**
-     * <code>int32 cFlag = 4;</code>
-     * @param value The cFlag to set.
+     * <code>int32 pid = 4;</code>
+     * @param value The pid to set.
      * @return This builder for chaining.
      */
-    public Builder setCFlag(int value) {
+    public Builder setPid(int value) {
 
-      cFlag_ = value;
+      pid_ = value;
       bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 cFlag = 4;</code>
+     * <code>int32 pid = 4;</code>
      * @return This builder for chaining.
      */
-    public Builder clearCFlag() {
+    public Builder clearPid() {
       bitField0_ = (bitField0_ & ~0x00000008);
-      cFlag_ = 0;
-      onChanged();
-      return this;
-    }
-
-    private int xid_ ;
-    /**
-     * <code>int32 xid = 5;</code>
-     * @return The xid.
-     */
-    @java.lang.Override
-    public int getXid() {
-      return xid_;
-    }
-    /**
-     * <code>int32 xid = 5;</code>
-     * @param value The xid to set.
-     * @return This builder for chaining.
-     */
-    public Builder setXid(int value) {
-
-      xid_ = value;
-      bitField0_ |= 0x00000010;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>int32 xid = 5;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearXid() {
-      bitField0_ = (bitField0_ & ~0x00000010);
-      xid_ = 0;
+      pid_ = 0;
       onChanged();
       return this;
     }
@@ -866,9 +800,9 @@ private static final long serialVersionUID = 0L;
     private java.util.List<com.aurora.grpc.ProcessMetricItem> metrics_ =
       java.util.Collections.emptyList();
     private void ensureMetricsIsMutable() {
-      if (!((bitField0_ & 0x00000020) != 0)) {
+      if (!((bitField0_ & 0x00000010) != 0)) {
         metrics_ = new java.util.ArrayList<com.aurora.grpc.ProcessMetricItem>(metrics_);
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
        }
     }
 
@@ -876,7 +810,7 @@ private static final long serialVersionUID = 0L;
         com.aurora.grpc.ProcessMetricItem, com.aurora.grpc.ProcessMetricItem.Builder, com.aurora.grpc.ProcessMetricItemOrBuilder> metricsBuilder_;
 
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public java.util.List<com.aurora.grpc.ProcessMetricItem> getMetricsList() {
       if (metricsBuilder_ == null) {
@@ -886,7 +820,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public int getMetricsCount() {
       if (metricsBuilder_ == null) {
@@ -896,7 +830,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public com.aurora.grpc.ProcessMetricItem getMetrics(int index) {
       if (metricsBuilder_ == null) {
@@ -906,7 +840,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public Builder setMetrics(
         int index, com.aurora.grpc.ProcessMetricItem value) {
@@ -923,7 +857,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public Builder setMetrics(
         int index, com.aurora.grpc.ProcessMetricItem.Builder builderForValue) {
@@ -937,7 +871,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public Builder addMetrics(com.aurora.grpc.ProcessMetricItem value) {
       if (metricsBuilder_ == null) {
@@ -953,7 +887,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public Builder addMetrics(
         int index, com.aurora.grpc.ProcessMetricItem value) {
@@ -970,7 +904,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public Builder addMetrics(
         com.aurora.grpc.ProcessMetricItem.Builder builderForValue) {
@@ -984,7 +918,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public Builder addMetrics(
         int index, com.aurora.grpc.ProcessMetricItem.Builder builderForValue) {
@@ -998,7 +932,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public Builder addAllMetrics(
         java.lang.Iterable<? extends com.aurora.grpc.ProcessMetricItem> values) {
@@ -1013,12 +947,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public Builder clearMetrics() {
       if (metricsBuilder_ == null) {
         metrics_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
       } else {
         metricsBuilder_.clear();
@@ -1026,7 +960,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public Builder removeMetrics(int index) {
       if (metricsBuilder_ == null) {
@@ -1039,14 +973,14 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public com.aurora.grpc.ProcessMetricItem.Builder getMetricsBuilder(
         int index) {
       return getMetricsFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public com.aurora.grpc.ProcessMetricItemOrBuilder getMetricsOrBuilder(
         int index) {
@@ -1056,7 +990,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public java.util.List<? extends com.aurora.grpc.ProcessMetricItemOrBuilder> 
          getMetricsOrBuilderList() {
@@ -1067,14 +1001,14 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public com.aurora.grpc.ProcessMetricItem.Builder addMetricsBuilder() {
       return getMetricsFieldBuilder().addBuilder(
           com.aurora.grpc.ProcessMetricItem.getDefaultInstance());
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public com.aurora.grpc.ProcessMetricItem.Builder addMetricsBuilder(
         int index) {
@@ -1082,7 +1016,7 @@ private static final long serialVersionUID = 0L;
           index, com.aurora.grpc.ProcessMetricItem.getDefaultInstance());
     }
     /**
-     * <code>repeated .aurora.ProcessMetricItem metrics = 6;</code>
+     * <code>repeated .aurora.ProcessMetricItem metrics = 5;</code>
      */
     public java.util.List<com.aurora.grpc.ProcessMetricItem.Builder> 
          getMetricsBuilderList() {
@@ -1095,7 +1029,7 @@ private static final long serialVersionUID = 0L;
         metricsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             com.aurora.grpc.ProcessMetricItem, com.aurora.grpc.ProcessMetricItem.Builder, com.aurora.grpc.ProcessMetricItemOrBuilder>(
                 metrics_,
-                ((bitField0_ & 0x00000020) != 0),
+                ((bitField0_ & 0x00000010) != 0),
                 getParentForChildren(),
                 isClean());
         metrics_ = null;

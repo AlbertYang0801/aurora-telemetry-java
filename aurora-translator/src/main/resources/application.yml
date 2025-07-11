@@ -3,7 +3,7 @@ grpc:
   server:
     port: 9090
 
-    # 10MB
+    # gRPC服务端允许接收的单个消息的最大字节数
     max-inbound-message-size: 10485760
     executor:
       core-pool-size: 16
@@ -24,6 +24,9 @@ spring:
       buffer-memory: 33554432  # 生产者的内存缓冲区大小。如果生产者发送消息的速度 > 消息发送到kafka的速度，那么消息就会在缓冲区堆积，导致缓冲区不足。这个时候，send()方法要么阻塞，要么抛出异常。
       max-request-size: 5242880 # 生产者发送消息的大小。可以是一个消息的大小，也可以发送的一个批次的消息大小
 
+
+# 自定义kafka topic
 kafka:
   custom:
-    metric-topic: metric
+    device-metric-topic: device_metric
+    process-metric-topic: process_metric
