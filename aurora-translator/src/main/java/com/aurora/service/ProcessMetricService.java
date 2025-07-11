@@ -42,7 +42,7 @@ public class ProcessMetricService extends ProcessMetricServiceGrpc.ProcessMetric
 
             @Override
             public void onCompleted() {
-                String format = String.format("Processed %d messages", messageCount);
+                String format = String.format("receiver %d messages", messageCount);
                 ProcessMetricAck processMetricAck = ProcessMetricAck.newBuilder()
                         .setCode(200)
                         .setMessage(format)

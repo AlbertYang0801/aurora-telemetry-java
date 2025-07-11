@@ -95,7 +95,7 @@ public class DeviceMetricGrpcClient {
 
     public static void main(String[] args) throws InterruptedException {
         // 创建客户端，连接到服务器
-        DeviceMetricGrpcClient client = new DeviceMetricGrpcClient("localhost", 9090);
+        DeviceMetricGrpcClient client = new DeviceMetricGrpcClient("localhost", 19090);
         try {
             List<DeviceMetricMessage> rootMessages = new ArrayList<>();
 

@@ -41,7 +41,7 @@ public class DeviceMetricService extends DeviceMetricServiceGrpc.DeviceMetricSer
 
             @Override
             public void onCompleted() {
-                String format = String.format("Processed %d messages", messageCount);
+                String format = String.format("receiver %d messages", messageCount);
                 DeviceMetricAck metricAck = DeviceMetricAck.newBuilder()
                         .setCode(200)
                         .setMessage(format)

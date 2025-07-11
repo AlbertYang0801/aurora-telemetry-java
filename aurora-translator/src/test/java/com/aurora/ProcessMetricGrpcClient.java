@@ -92,7 +92,7 @@ public class ProcessMetricGrpcClient {
 
     public static void main(String[] args) throws InterruptedException {
         // 创建客户端，连接到服务器
-        ProcessMetricGrpcClient client = new ProcessMetricGrpcClient("localhost", 9090);
+        ProcessMetricGrpcClient client = new ProcessMetricGrpcClient("localhost", 19090);
         try {
             List<ProcessMetricMessage> rootMessages = new ArrayList<>();
 

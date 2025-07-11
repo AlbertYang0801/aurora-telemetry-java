@@ -38,7 +38,10 @@ public class DataBuffer<T> {
 
     private final int flushTime;
 
+    private ClickHouseDataFlushType clickHouseDataFlushType;
+
     public DataBuffer(ClickHouseDataFlushType clickHouseDataFlushType) {
+        this.clickHouseDataFlushType = clickHouseDataFlushType;
         this.flushTask = new FlushTask<>(clickHouseDataFlushType);
         this.flushSize = clickHouseDataFlushType.getFlushSize();
         this.flushTime = clickHouseDataFlushType.getFlushTimeSeconds();
@@ -68,7 +71,7 @@ public class DataBuffer<T> {
         try {
             queue.put(data);
         } catch (InterruptedException e) {
-            logger.warn(" DataBuffer Interrupted: ", e);
+            logger.warn("【{}】 DataBuffer Interrupted: ", clickHouseDataFlushType.getTableName(), e);
         }
     }
 
@@ -76,7 +79,7 @@ public class DataBuffer<T> {
      * 定期处理buffer中数据，并写入ClickHouse
      */
     public void startScheduleProcessBuffer() {
-        logger.info("scheduleProcessBuffer start");
+        logger.info("【{}】 scheduleProcessBuffer start", clickHouseDataFlushType.getTableName());
         //1s检查1次
         executorService.scheduleAtFixedRate(() -> {
             int count = queue.size();
@@ -84,11 +87,11 @@ public class DataBuffer<T> {
             //flush
             if (count >= flushSize || time >= flushTime) {
                 try {
-                    logger.info("flush buffer size:{}, time:{}", count, time);
+                    logger.info("【{}】flush buffer size:{}, time:{}", clickHouseDataFlushType.getTableName(), count, time);
                     flushBuffer();
                     elapsedTime.set(0);
                 } catch (Exception e) {
-                    logger.warn("scheduleProcessBuffer error:", e);
+                    logger.warn("【{}】 scheduleProcessBuffer error:", clickHouseDataFlushType.getTableName(), e);
                 }
             }
         }, 1000, 1000, TimeUnit.MILLISECONDS);
@@ -108,8 +111,8 @@ public class DataBuffer<T> {
         elapsedTime.set(0);
     }
 
-    public void flushAll(){
-        logger.info("flushAll start");
+    public void flushAll() {
+        logger.info("【{}】 flushAll start", clickHouseDataFlushType.getTableName());
         flushBuffer();
     }
 

@@ -1,7 +1,7 @@
 # gRPC 端口
 grpc:
   server:
-    port: 9090
+    port: 19090
 
     # gRPC服务端允许接收的单个消息的最大字节数
     max-inbound-message-size: 10485760
