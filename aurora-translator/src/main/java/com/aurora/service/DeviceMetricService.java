@@ -3,9 +3,11 @@ package com.aurora.service;
 import com.aurora.grpc.DeviceMetricAck;
 import com.aurora.grpc.DeviceMetricMessage;
 import com.aurora.grpc.DeviceMetricServiceGrpc;
+import com.aurora.kafka.KafkaHelper;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 接收Metric指标数据
@@ -17,6 +19,9 @@ import net.devh.boot.grpc.server.service.GrpcService;
 @Slf4j
 public class DeviceMetricService extends DeviceMetricServiceGrpc.DeviceMetricServiceImplBase {
 
+    @Autowired
+    private KafkaHelper kafkaHelper;
+
     @Override
     public StreamObserver<DeviceMetricMessage> report(StreamObserver<DeviceMetricAck> responseObserver) {
         return new StreamObserver<>() {
@@ -25,6 +30,7 @@ public class DeviceMetricService extends DeviceMetricServiceGrpc.DeviceMetricSer
             @Override
             public void onNext(DeviceMetricMessage metricMessage) {
                 System.out.println("receiver msg:\n" + metricMessage.toString());
+                kafkaHelper.sendDeviceMessage(metricMessage);
                 messageCount++;
             }
 

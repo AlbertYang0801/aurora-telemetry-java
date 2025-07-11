@@ -1,6 +1,8 @@
-package com.aurora.clickhouse;
+package com.aurora.clickhouse.buffer;
 
 import cn.hutool.core.collection.CollUtil;
+import com.aurora.clickhouse.ClickHouseDataFlushType;
+import com.aurora.clickhouse.FlushTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +38,17 @@ public class DataBuffer<T> {
 
     private final int flushTime;
 
+    public DataBuffer(ClickHouseDataFlushType clickHouseDataFlushType) {
+        this.flushTask = new FlushTask<>(clickHouseDataFlushType);
+        this.flushSize = clickHouseDataFlushType.getFlushSize();
+        this.flushTime = clickHouseDataFlushType.getFlushTimeSeconds();
+        this.queue = new ArrayBlockingQueue<>(flushSize * 2);
+        executorService = Executors.newSingleThreadScheduledExecutor();
+        elapsedTime = new AtomicInteger(0);
+        //开启定时线程
+        startScheduleProcessBuffer();
+    }
+
     /**
      * @param flushSize        队列达到批次大小进行刷新
      * @param flushTimeSeconds 经过指定时间写入数据
@@ -45,11 +58,8 @@ public class DataBuffer<T> {
         this.flushSize = flushSize;
         this.flushTime = flushTimeSeconds;
         this.queue = new ArrayBlockingQueue<>(flushSize * 2);
-
         executorService = Executors.newSingleThreadScheduledExecutor();
-
         elapsedTime = new AtomicInteger(0);
-
         //开启定时线程
         startScheduleProcessBuffer();
     }
@@ -66,6 +76,7 @@ public class DataBuffer<T> {
      * 定期处理buffer中数据，并写入ClickHouse
      */
     public void startScheduleProcessBuffer() {
+        logger.info("scheduleProcessBuffer start");
         //1s检查1次
         executorService.scheduleAtFixedRate(() -> {
             int count = queue.size();
@@ -73,10 +84,11 @@ public class DataBuffer<T> {
             //flush
             if (count >= flushSize || time >= flushTime) {
                 try {
+                    logger.info("flush buffer size:{}, time:{}", count, time);
                     flushBuffer();
                     elapsedTime.set(0);
                 } catch (Exception e) {
-                    logger.warn(" startScheduleProcessBuffer error:", e);
+                    logger.warn("scheduleProcessBuffer error:", e);
                 }
             }
         }, 1000, 1000, TimeUnit.MILLISECONDS);
@@ -97,6 +109,7 @@ public class DataBuffer<T> {
     }
 
     public void flushAll(){
+        logger.info("flushAll start");
         flushBuffer();
     }
 

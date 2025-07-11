@@ -1,7 +1,7 @@
 package com.aurora.kafka;
 
 /**
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/7/8 13:20
  */
 public interface KafkaPollMonitor {

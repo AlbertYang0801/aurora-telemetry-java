@@ -1,4 +1,4 @@
-package com.aurora.clickhouse;
+package com.aurora.clickhouse.handler;
 
 import cn.hutool.core.collection.CollUtil;
 import com.clickhouse.client.api.Client;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/7/9 15:41
  */
 @Component

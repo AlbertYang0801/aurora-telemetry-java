@@ -22,7 +22,8 @@ public class KafkaCustomProperties {
 
     private Integer consumerThreadPoolSize;
 
-    private String metricTopic;
+    private String deviceMetricTopic;
 
+    private String processMetricTopic;
 
 }

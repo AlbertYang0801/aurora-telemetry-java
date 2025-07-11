@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
  * 默认的日志型 Kafka Poll 监控监听器。
  * 将 poll 间隔和耗时信息打印为日志，便于观察消息堆积情况。
  *
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/7/8 13:24
  */
 public class LoggingKafkaPollMonitor implements KafkaPollMonitor {

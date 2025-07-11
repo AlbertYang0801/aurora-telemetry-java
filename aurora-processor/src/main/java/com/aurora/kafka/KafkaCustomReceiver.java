@@ -14,8 +14,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.Executors;
@@ -49,7 +51,7 @@ public class KafkaCustomReceiver {
         props.put("bootstrap.servers", kafkaProperties.getBootstrapServers());
         props.put("group.id", kafkaProperties.getConsumer().getGroupId());
         props.put("enable.auto.commit", kafkaProperties.getConsumer().getEnableAutoCommit());
-        props.put("auto.commit.interval.ms", (int)kafkaProperties.getConsumer().getAutoCommitInterval().getSeconds() * 1000);
+        props.put("auto.commit.interval.ms", (int) kafkaProperties.getConsumer().getAutoCommitInterval().getSeconds() * 1000);
         props.put("max.poll.records", kafkaProperties.getConsumer().getMaxPollRecords());
         props.put("max.poll.interval.ms", Integer.MAX_VALUE);
         props.put("key.deserializer", kafkaProperties.getConsumer().getKeyDeserializer());
@@ -60,18 +62,21 @@ public class KafkaCustomReceiver {
             props.put(SaslConfigs.SASL_MECHANISM, kafkaCustomProperties.getSaslMechanism());
             props.put(SaslConfigs.SASL_JAAS_CONFIG, kafkaCustomProperties.getSaslJaasConfig());
         }
-        List<String> topics = new ArrayList<>();
-        //metric-topic
-        topics.add(kafkaCustomProperties.getMetricTopic());
         KafkaConsumer<String, byte[]> consumer = new KafkaConsumer<>(props);
+        //metric-topic
+        List<String> topics = new ArrayList<>();
+        topics.add(kafkaCustomProperties.getDeviceMetricTopic());
+        topics.add(kafkaCustomProperties.getProcessMetricTopic());
+        //支持更多topic订阅
+
         consumer.subscribe(topics);
         logger.info("Subscribe kafka topics: {}", JSONUtil.toJsonStr(topics));
         monitoredKafkaConsumer = new MonitoredKafkaConsumer(consumer, new LoggingKafkaPollMonitor());
     }
 
-
     public final void receive() {
         try {
+            logger.info("start to receive kafka message");
             while (working) {
                 try {
                     if (Thread.currentThread().isInterrupted()) {
@@ -87,7 +92,7 @@ public class KafkaCustomReceiver {
                     for (ConsumerRecord<String, byte[]> record : records) {
                         //根据topic选择processor
                         DataProcessor processor = kafkaProcessorFactory.getProcessor(record.topic());
-                        processor.processData(record.value());
+                        processor.process(record.value());
                         count++;
                     }
                 } catch (Throwable exception) {
@@ -105,6 +110,7 @@ public class KafkaCustomReceiver {
     }
 
     private void countMessage() {
+        logger.info("start to count message");
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.scheduleAtFixedRate(new Counter(), 1, 1, TimeUnit.MINUTES);
     }
@@ -132,6 +138,13 @@ public class KafkaCustomReceiver {
         countMessage();
         //接收kafka消息
         receive();
+    }
+
+    @PreDestroy
+    public void shutdown() {
+        working = false;
+        monitoredKafkaConsumer.close();
+        logger.info("kafka receiver shutdown");
     }
 
 

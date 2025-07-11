@@ -3,7 +3,7 @@ package com.aurora.clickhouse;
 import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.extra.spring.SpringUtil;
-import com.aurora.enums.ClickHouseDataType;
+import com.aurora.clickhouse.handler.ClickHouseInsertHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,10 +19,10 @@ public class FlushTask<T> {
 
     protected static final Logger logger = LoggerFactory.getLogger(FlushTask.class);
 
-    private final ClickHouseDataType clickHouseDataType;
+    private final ClickHouseDataFlushType clickHouseDataFlushType;
 
-    protected FlushTask(ClickHouseDataType clickHouseDataType) {
-        this.clickHouseDataType = clickHouseDataType;
+    public FlushTask(ClickHouseDataFlushType clickHouseDataFlushType) {
+        this.clickHouseDataFlushType = clickHouseDataFlushType;
     }
 
     /**
@@ -52,8 +52,8 @@ public class FlushTask<T> {
             @Override
             public void run() {
                 //批量写入clickhouse
-                long insertSize = SpringUtil.getBean(ClickHouseInsertHandler.class).batchInsert(clickHouseDataType.getTableName(), data, 500);
-                logger.debug(clickHouseDataType.getTableName() + " insert to clickhouse {} items , success {} items", data.size(), insertSize);
+                long insertSize = SpringUtil.getBean(ClickHouseInsertHandler.class).batchInsert(clickHouseDataFlushType.getTableName(), data, 500);
+                logger.debug(clickHouseDataFlushType.getTableName() + " insert to clickhouse {} items , success {} items", data.size(), insertSize);
             }
         });
     }

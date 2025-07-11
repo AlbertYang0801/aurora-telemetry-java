@@ -1,21 +1,20 @@
 package com.aurora.processor;
 
-import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.NamedThreadFactory;
-import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.aurora.config.KafkaCustomProperties;
 import com.aurora.handler.BlockReceiverRejectionHandler;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
-import javax.annotation.Resource;
-import java.util.concurrent.ExecutorService;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/7/7 18:43
  */
 public abstract class DataProcessor {
@@ -37,16 +36,12 @@ public abstract class DataProcessor {
         );
     }
 
-    public void processData(byte[] data) {
-        executor.submit(() -> process(data));
-    }
-
     /**
      * 处理数据
      *
      * @param data
      */
-    abstract protected void process(byte[] data);
+    abstract public void process(byte[] data);
 
 
     /**
@@ -56,6 +51,12 @@ public abstract class DataProcessor {
      */
     public static int remainingCapacity() {
         return executor.getQueue().remainingCapacity();
+    }
+
+    protected static LocalDateTime convertTime(Long time) {
+        return Instant.ofEpochMilli(time)
+                .atZone(ZoneId.of("Asia/Shanghai"))
+                .toLocalDateTime();
     }
 
 

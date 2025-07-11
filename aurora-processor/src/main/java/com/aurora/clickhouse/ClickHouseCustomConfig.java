@@ -1,6 +1,8 @@
-package com.aurora.config;
+package com.aurora.clickhouse;
 
+import com.aurora.config.ClickHouseProperties;
 import com.clickhouse.client.api.Client;
+import com.clickhouse.client.api.ClientFaultCause;
 import org.apache.hc.core5.concurrent.DefaultThreadFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +14,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/7/8 18:21
  */
 @Configuration
@@ -32,8 +34,6 @@ public class ClickHouseCustomConfig {
                 .enableConnectionPool(true)
                 .setConnectTimeout(clickHouseProperties.getConnectionTimeout())
                 .setSocketTimeout(clickHouseProperties.getSocketTimeout())
-                //重试次数
-                .setMaxRetries(3)
                 //客户端是否应压缩其请求
                 .compressClientRequest(true)
                 .build();

@@ -22,8 +22,8 @@ kafka:
     sasl-jaas-config: org.apache.kafka.common.security.scram.ScramLoginModule required username=\"admin\" password=\"adminpwd\";
     # 消费线程池大小
     consumer-thread-pool-size: 10
-    # 指标topic
-    metric-topic: metric
+    device-metric-topic: device_metric
+    process-metric-topic: process_metric
 
 
 
@@ -31,7 +31,7 @@ clickhouse:
   url: http://118.25.129.41:8123/
   username: test
   password: 123456
-  database: test_db
+  database: aurora
   socket-timeout: 30000
   connection-timeout: 5000
 

@@ -1,7 +1,6 @@
 package com.aurora.runner;
 
 import com.aurora.kafka.KafkaCustomReceiver;
-import com.aurora.processor.MetricDataProcessor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Component;
 public class KafkaReceiverRunner implements ApplicationRunner {
 
     private static final Logger logger = LogManager.getLogger(KafkaReceiverRunner.class);
-
 
     @Autowired
     KafkaCustomReceiver kafkaCustomReceiver;
