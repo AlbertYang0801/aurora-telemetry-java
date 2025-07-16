@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS aurora.device_metric
 (
     `placeId` UInt32,
     `ip` String,
-    `time` DateTime64(3, 'Asia/Shanghai'),
+    `time` DateTime('Asia/Shanghai'),
     `tid` UInt32,
     `value` Float64,
     `date` Date MATERIALIZED toDate(time) -- 物化日期列
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS aurora.process_metric
     `placeId` UInt32,
     `ip` String,
     `pid` UInt32,
-    `time` DateTime64(3, 'Asia/Shanghai'),
+    `time` DateTime('Asia/Shanghai')
     `tid` UInt32,
     `value` Float64,
     `date` Date MATERIALIZED toDate(time) -- 物化日期列

@@ -1,12 +1,12 @@
 package com.aurora.kafka;
 
+import jakarta.annotation.Resource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.concurrent.CompletableFuture;
 
 /**

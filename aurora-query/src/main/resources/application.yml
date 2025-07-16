@@ -1,0 +1,33 @@
+server:
+  port: 8999
+
+spring:
+  datasource:
+    url: jdbc:clickhouse://118.25.129.41:8123/aurora
+    username: test
+    password: 123456
+    driver-class-name: com.clickhouse.jdbc.ClickHouseDriver
+    # 显式指定类型为 druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 30
+      min-idle: 10
+      max-active: 100
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM system.one
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+      filters: stat,wall
+      use-global-data-source-stat: true
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true # 开启驼峰命名
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启 SQL 日志（可选）
+  mapper-locations: classpath*:/mapper/**/*.xml # XML 文件位置

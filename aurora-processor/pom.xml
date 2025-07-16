@@ -24,6 +24,12 @@
             <groupId>com.aurora</groupId>
             <artifactId>aurora-common</artifactId>
             <version>1.0.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.devh</groupId>
+                    <artifactId>grpc-spring-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -52,7 +58,6 @@
 
 
     </dependencies>
-
 
 
 </project>

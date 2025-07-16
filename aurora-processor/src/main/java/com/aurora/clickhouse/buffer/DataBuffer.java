@@ -38,28 +38,13 @@ public class DataBuffer<T> {
 
     private final int flushTime;
 
-    private ClickHouseDataFlushType clickHouseDataFlushType;
+    private final ClickHouseDataFlushType clickHouseDataFlushType;
 
     public DataBuffer(ClickHouseDataFlushType clickHouseDataFlushType) {
         this.clickHouseDataFlushType = clickHouseDataFlushType;
         this.flushTask = new FlushTask<>(clickHouseDataFlushType);
         this.flushSize = clickHouseDataFlushType.getFlushSize();
         this.flushTime = clickHouseDataFlushType.getFlushTimeSeconds();
-        this.queue = new ArrayBlockingQueue<>(flushSize * 2);
-        executorService = Executors.newSingleThreadScheduledExecutor();
-        elapsedTime = new AtomicInteger(0);
-        //开启定时线程
-        startScheduleProcessBuffer();
-    }
-
-    /**
-     * @param flushSize        队列达到批次大小进行刷新
-     * @param flushTimeSeconds 经过指定时间写入数据
-     */
-    public DataBuffer(FlushTask<T> flushTask, int flushSize, int flushTimeSeconds) {
-        this.flushTask = flushTask;
-        this.flushSize = flushSize;
-        this.flushTime = flushTimeSeconds;
         this.queue = new ArrayBlockingQueue<>(flushSize * 2);
         executorService = Executors.newSingleThreadScheduledExecutor();
         elapsedTime = new AtomicInteger(0);
