@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS aurora.device_metric
 (
-    `placeId` UInt32,
+    `place_id` UInt32,
     `ip` String,
     `time` DateTime('Asia/Shanghai'),
     `tid` UInt32,
@@ -17,7 +17,7 @@ SETTINGS index_granularity = 8192;
 
 CREATE TABLE IF NOT EXISTS aurora.process_metric
 (
-    `placeId` UInt32,
+    `place_id` UInt32,
     `ip` String,
     `pid` UInt32,
     `time` DateTime('Asia/Shanghai')

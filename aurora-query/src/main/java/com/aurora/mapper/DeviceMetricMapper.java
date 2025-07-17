@@ -3,6 +3,9 @@ package com.aurora.mapper;
 import com.aurora.entity.DeviceMetricDo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * @author yangjunwei
@@ -11,5 +14,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface DeviceMetricMapper extends BaseMapper<DeviceMetricDo> {
 
+    List<DeviceMetricDo> testSelect();
 
 }

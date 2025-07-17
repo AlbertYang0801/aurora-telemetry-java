@@ -20,7 +20,7 @@ public class DeviceMetricController {
 
     @GetMapping("/device/metric/list")
     public List<DeviceMetricDo> list(){
-        return deviceMetricService.list();
+        return deviceMetricService.testSelect();
     }
 
 }
