@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS aurora;
+
+
+
 CREATE TABLE IF NOT EXISTS aurora.device_metric
 (
     `place_id` UInt32,
@@ -9,7 +13,7 @@ CREATE TABLE IF NOT EXISTS aurora.device_metric
 )
     ENGINE = MergeTree() -- 使用MergeTree引擎
     PARTITION BY date  -- 按天分区(直接使用物化日期列)
-ORDER BY (placeId,ip, tid, time)  -- 保持原有排序键
+ORDER BY (place_id,ip, tid, time)  -- 保持原有排序键
 TTL time + INTERVAL 7 DAY  -- 设置7天自动过期
 SETTINGS index_granularity = 8192;
 
@@ -27,6 +31,6 @@ CREATE TABLE IF NOT EXISTS aurora.process_metric
 )
     ENGINE = MergeTree() -- 使用MergeTree引擎
     PARTITION BY date  -- 按天分区(直接使用物化日期列)
-ORDER BY (placeId,ip,pid, tid, time)  -- 保持原有排序键
+ORDER BY (place_id,ip,pid, tid, time)  -- 保持原有排序键
 TTL time + INTERVAL 7 DAY  -- 设置7天自动过期
 SETTINGS index_granularity = 8192;

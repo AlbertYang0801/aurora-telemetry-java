@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:clickhouse://118.25.129.41:8123/aurora
+    url: jdbc:clickhouse://118.25.129.41:8123/aurora?compress=0
     username: test
     password: 123456
     driver-class-name: com.clickhouse.jdbc.ClickHouseDriver
@@ -34,6 +34,7 @@ mybatis-plus:
   # 实体扫描，多个package用逗号或者分号分隔
   type-aliases-package: com.aurora.entity
 
+# mapper日志输出
 logging:
   level:
     com.aurora.mapper: debug

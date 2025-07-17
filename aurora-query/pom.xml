@@ -48,8 +48,7 @@
         <dependency>
             <groupId>com.clickhouse</groupId>
             <artifactId>clickhouse-jdbc</artifactId>
-            <version>0.8.2</version>
-            <classifier>shaded-all</classifier>
+            <version>0.4.2</version>
         </dependency>
 
         <dependency>
@@ -81,15 +80,18 @@
             <artifactId>jakarta.annotation-api</artifactId>
             <version>2.1.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
+
         <!-- 日志 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>-->
+<!--            <version>3.6.1</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 
@@ -105,7 +107,7 @@
                 <artifactId>maven-source-plugin</artifactId>
                 <configuration>
                     <skipSource>true</skipSource>
-                    <defaultManifestFile />
+                    <defaultManifestFile/>
                 </configuration>
             </plugin>
         </plugins>
