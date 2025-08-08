@@ -2,12 +2,12 @@ package com.aurora.clickhouse.handler;
 
 import com.aurora.clickhouse.anno.ClickHouseTable;
 import com.clickhouse.client.api.Client;
+import jakarta.annotation.Resource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.reflections.Reflections;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

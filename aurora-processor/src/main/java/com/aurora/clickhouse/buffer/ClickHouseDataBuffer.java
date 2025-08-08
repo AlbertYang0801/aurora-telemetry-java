@@ -4,12 +4,12 @@ package com.aurora.clickhouse.buffer;
 import cn.hutool.json.JSONUtil;
 import com.aurora.clickhouse.ClickHouseDataFlushType;
 import com.aurora.entity.BaseClickhouseData;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

@@ -3,12 +3,12 @@ package com.aurora.clickhouse.handler;
 import cn.hutool.core.collection.CollUtil;
 import com.clickhouse.client.api.Client;
 import com.clickhouse.client.api.insert.InsertResponse;
+import jakarta.annotation.Resource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 

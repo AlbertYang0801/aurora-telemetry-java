@@ -1,11 +1,11 @@
 package com.aurora.runner;
 
 import com.aurora.clickhouse.handler.ClickHouseTableRegisterHandler;
+import jakarta.annotation.Resource;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 
 /**
  * @author AlbertYang

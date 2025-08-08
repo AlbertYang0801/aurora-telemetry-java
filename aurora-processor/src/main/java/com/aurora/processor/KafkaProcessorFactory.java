@@ -4,9 +4,9 @@ import cn.hutool.core.util.StrUtil;
 import com.aurora.config.KafkaCustomProperties;
 import com.aurora.processor.custom.DeviceMetricDataProcessor;
 import com.aurora.processor.custom.ProcessMetricDataProcessor;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 
 /**
  * @author AlbertYang
