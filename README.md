@@ -32,7 +32,8 @@
 - Java Development Kit (JDK)
 - Apache Maven 或 Gradle
 - Docker（如果使用容器化部署）
-- Zookeeper（用于Kafka）
+- Kafka
+- ClickHouse
 
 ### 安装步骤
 
