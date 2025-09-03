@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package aurora;
+
+option csharp_namespace = "EventData.Grpc";
+option java_multiple_files = true;
+option java_package = "com.aurora.grpc";
+option java_outer_classname = "EventProto";
+
+// 事件服务接口定义
+service EventService {
+  // 单条事件上报
+  rpc Report(EventDataMessage) returns (EventAck);
+
+  // 流式上报事件数据 - 适合高频连续数据
+  rpc ReportStream(stream EventDataMessage) returns (EventAck);
+
+  // 批量上报事件数据 - 推荐生产环境使用
+  rpc ReportBatch(BatchEventDataRequest) returns (EventAck);
+}
+
+// 批量事件请求消息
+message BatchEventDataRequest {
+  // 事件列表
+  repeated EventDataMessage events = 1;
+
+  // 批次ID，用于追踪和去重
+  string batchId = 2;
+
+}
+
+// 事件数据消息
+message EventDataMessage {
+
+  // 事件时间戳（Unix 毫秒时间戳）
+  int64 timestamp = 1;
+
+  // 事件类型 - 4字节无符号整数，标识事件类型
+  uint32 eventType = 2;
+
+  // 跟踪上下文
+  bytes traceId = 3;  // 16字节
+
+  // 上报来源标识
+  string sourceId = 4;    // 来源唯一标识
+
+  // 事件的数据内容
+  map<string, string> eventData = 5;
+
+
+}
+
+// 事件响应消息
+message EventAck {
+
+  // 响应码（200=成功）
+  int32 code = 1;
+
+  // 响应消息
+  string message = 2;
+
+  // 处理的事件数量
+  int32 processedCount = 3;
+
+  // 失败的事件数量
+  int32 failedCount = 4;
+
+  // 处理时间戳
+  int64 processedAt = 5;
+
+
+}
