@@ -1,0 +1,7 @@
+{
+    "window.zoomLevel": 2,
+    "editor.mouseWheelZoom": true,
+    "terminal.integrated.mouseWheelZoom": false,
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

@@ -2,31 +2,71 @@
 grpc:
   server:
     port: 19090
-
     # gRPC服务端允许接收的单个消息的最大字节数
     max-inbound-message-size: 10485760
+    # 连接超时设置
+    handshake-timeout: 30s
+    # 保活设置
+    keep-alive-time: 30s
+    keep-alive-timeout: 5s
+    keep-alive-without-calls: true
+    # 最大连接空闲时间
+    max-connection-idle: 60s
+    # 线程池设置
     executor:
       core-pool-size: 16
       max-pool-size: 32
+      queue-capacity: 100
+      keep-alive-seconds: 60
 
 
 spring:
   kafka:
-    bootstrap-servers: 118.25.129.41:9092
+    bootstrap-servers: 192.168.102.154:9092
+    # kafka认证开关
+    auth-switch: false
+    # 认证信息
+    config:
+      # hostname校验改成空
+      ssl:
+        endpoint:
+          identification:
+            algorithm: ""
+        # 建议设置为绝对路径
+        truststore-location: aurora-common/ssl/xxx.jks
+      # 接入协议，目前支持使用SASL_SSL协议接入
+      security:
+        protocol: SASL_SSL
+      sasl:
+        #PLAIN, SCRAM-SHA-256
+        mechanism: PLAIN
+        # 设置SASL账号密码，从控制台获取
+        username: xxx
+        password: xxx
+        # 根证书store的密码，保持不变
+        truststore_password: KafkaOnsClient
+
     producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
       batch-size: 16384       # 单个批次（Batch）中未压缩消息的最大字节数（默认 16KB）
-      linger-ms: 1         # 生产者在发送一个批次之前，可以适当的等一小会，这样可以让更多的消息加入到该批次。这样会造成延时增加，但是降低了IO开销，增加了吞吐量
       compression-type: lz4  # 压缩算法
       acks: 1 #默认值即为1。生产者发送消息之后，只要分区的leader副本成功写入消息，那么它就会收到来自服务端的成功响应
-      retries: 10
       buffer-memory: 33554432  # 生产者的内存缓冲区大小。如果生产者发送消息的速度 > 消息发送到kafka的速度，那么消息就会在缓冲区堆积，导致缓冲区不足。这个时候，send()方法要么阻塞，要么抛出异常。
-      max-request-size: 5242880 # 生产者发送消息的大小。可以是一个消息的大小，也可以发送的一个批次的消息大小
-
+      # 请求的最长等待时间
+      max-block-ms: 30000
+      # 设置客户端内部重试次数
+      retries: 5
+      # 设置客户端内部重试间隔
+      reconnect-backoff-ms: 3000
+      enable-idempotence: false
 
 # 自定义kafka topic
 kafka:
   custom:
-    device-metric-topic: device_metric
-    process-metric-topic: process_metric
+    # 通用 event topic，用于接收基于 event.proto 定义的通用指标消息
+    event-topic: general_event
+    # 通用 metric topic，用于接收基于 metric.proto 定义的通用指标消息
+    metric-topic: general_metric
+
+
+
+

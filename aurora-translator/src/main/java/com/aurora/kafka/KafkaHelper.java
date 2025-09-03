@@ -1,9 +1,8 @@
 package com.aurora.kafka;
 
-import cn.hutool.core.convert.Convert;
 import com.aurora.config.KafkaCustomConfig;
-import com.aurora.grpc.DeviceMetricMessage;
-import com.aurora.grpc.ProcessMetricMessage;
+import com.aurora.grpc.EventDataMessage;
+import com.aurora.grpc.MetricDataMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,21 +18,30 @@ public class KafkaHelper {
     @Autowired
     KafkaCustomProducer kafkaCustomProducer;
 
-    public void sendDeviceMessage(DeviceMetricMessage deviceMetricMessage) {
+    /**
+     * 发送事件到Kafka
+     * @param eventDataMessage
+     */
+    public void sendEvent(EventDataMessage eventDataMessage)  {
         //protoBuf格式转byte数组
-        byte[] data = deviceMetricMessage.toByteArray();
-        //指定placeId为partitionKey
-        int placeId = deviceMetricMessage.getPlaceId();
-        kafkaCustomProducer.send(kafkaCustomConfig.getDeviceMetricTopic(), Convert.toStr(placeId),data);
+        byte[] data = eventDataMessage.toByteArray();
+        //指定sourceId为partitionKey
+        String sourceId = eventDataMessage.getSourceId();
+        kafkaCustomProducer.send(kafkaCustomConfig.getEventTopic(), sourceId,data);
     }
 
-    public void sendProcessMetric(ProcessMetricMessage processMetricMessage) {
+    /**
+     * 发送指标到Kafka
+     * @param metricDataMessage
+     */
+    public void sendMetric(MetricDataMessage metricDataMessage)  {
         //protoBuf格式转byte数组
-        byte[] data = processMetricMessage.toByteArray();
-        //指定placeId为partitionKey
-        int placeId = processMetricMessage.getPlaceId();
-        kafkaCustomProducer.send(kafkaCustomConfig.getProcessMetricTopic(), Convert.toStr(placeId),data);
+        byte[] data = metricDataMessage.toByteArray();
+        //指定sourceId为partitionKey
+        String sourceId = metricDataMessage.getSourceId();
+        kafkaCustomProducer.send(kafkaCustomConfig.getMetricTopic(), sourceId,data);
     }
+
 
 
 

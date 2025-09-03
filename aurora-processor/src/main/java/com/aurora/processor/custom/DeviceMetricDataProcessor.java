@@ -5,8 +5,6 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.aurora.clickhouse.ClickHouseDataExporter;
 import com.aurora.entity.DeviceMetricDo;
 import com.aurora.clickhouse.ClickHouseDataFlushType;
-import com.aurora.grpc.DeviceMetricItem;
-import com.aurora.grpc.DeviceMetricMessage;
 import com.aurora.processor.DataProcessor;
 import com.google.protobuf.InvalidProtocolBufferException;
 import org.apache.logging.log4j.LogManager;
