@@ -1,3 +1,6 @@
+server:
+  port: 18080
+
 # gRPC 端口
 grpc:
   server:
