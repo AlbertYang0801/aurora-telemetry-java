@@ -422,7 +422,7 @@ public final class EventServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return com.aurora.grpc.EventProto.getDescriptor();
+      return com.aurora.grpc.EventServiceProto.getDescriptor();
     }
 
     @java.lang.Override

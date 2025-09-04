@@ -14,7 +14,7 @@ import java.util.Map;
  * 健康检查和监控端点
  * 提供服务状态、性能指标等信息
  *
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/9/3 21:45
  */
 @RestController

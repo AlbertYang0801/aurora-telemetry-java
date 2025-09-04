@@ -5,7 +5,7 @@ package aurora;
 option csharp_namespace = "EventData.Grpc";
 option java_multiple_files = true;
 option java_package = "com.aurora.grpc";
-option java_outer_classname = "EventProto";
+option java_outer_classname = "EventServiceProto";
 
 // 事件服务接口定义
 service EventService {

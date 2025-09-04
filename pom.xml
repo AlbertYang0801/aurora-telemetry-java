@@ -12,7 +12,6 @@
     <modules>
         <module>aurora-translator</module>
         <module>aurora-processor</module>
-        <module>aurora-alert</module>
         <module>aurora-common</module>
         <module>aurora-query</module>
     </modules>

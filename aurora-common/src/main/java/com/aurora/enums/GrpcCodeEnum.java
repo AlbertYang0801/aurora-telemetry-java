@@ -3,7 +3,7 @@ package com.aurora.enums;
 import lombok.Getter;
 
 /**
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/9/3 23:51
  */
 @Getter

@@ -2,6 +2,7 @@ package com.aurora.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.aurora.enums.GrpcCodeEnum;
+import com.aurora.grpc.*;
 import com.aurora.kafka.KafkaHelper;
 import com.aurora.monitor.GrpcMetricsCollector;
 import io.grpc.stub.StreamObserver;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Metric Service gRPC服务实现
  * 提供指标数据上报功能，支持单条、流式和批量上报模式
  * 
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/9/3 20:50
  */
 @GrpcService
@@ -238,22 +239,20 @@ public class MetricService extends MetricServiceGrpc.MetricServiceImplBase {
             }
             
             // 记录批次信息
-            log.info("Processing batch metrics, batchId: {}, metrics count: {}", 
-                    request.getBatchId(), request.getMetricsCount());
+            log.info("Processing batch metrics, metrics count: {}", request.getMetricsCount());
             
             // 批量处理指标
             for (MetricDataMessage metric : request.getMetricsList()) {
                 try {
                     // 验证单个指标数据
                     if (StrUtil.isEmpty(metric.getSourceId())) {
-                        log.warn("Skipping metric with empty sourceId in batch: {}", request.getBatchId());
+                        log.warn("Skipping metric with empty sourceId, traceId: {}", metric.getTraceId());
                         failedCount++;
                         continue;
                     }
                     
                     if (metric.getMetricsList().isEmpty()) {
-                        log.warn("Skipping metric with empty metrics list, sourceId: {}, batchId: {}", 
-                                metric.getSourceId(), request.getBatchId());
+                        log.warn("Skipping metric with empty metrics list, sourceId: {} , traceId: {}", metric.getSourceId(), metric.getTraceId());
                         failedCount++;
                         continue;
                     }
@@ -262,8 +261,7 @@ public class MetricService extends MetricServiceGrpc.MetricServiceImplBase {
                     processedCount++;
                     totalMetricItems += metric.getMetricsCount();
                 } catch (Exception e) {
-                    log.error("Failed to send metric to kafka, sourceId: {}, metrics count: {}, batchId: {}", 
-                            metric.getSourceId(), metric.getMetricsCount(), request.getBatchId(), e);
+                    log.error("Failed to send metric to kafka, sourceId: {}, metrics count: {}, traceId: {}", metric.getSourceId(), metric.getMetricsCount(), metric.getTraceId(), e);
                     failedCount++;
                 }
             }
@@ -278,8 +276,7 @@ public class MetricService extends MetricServiceGrpc.MetricServiceImplBase {
                         .setFailedCount(failedCount)
                         .setProcessedAt(System.currentTimeMillis())
                         .build();
-                log.warn("Batch processing completed with failures, batchId: {}, processed: {}, failed: {}, total metrics: {}", 
-                        request.getBatchId(), processedCount, failedCount, totalMetricItems);
+                log.warn("Batch processing completed with failures, processed: {}, failed: {}, total metrics: {}", processedCount, failedCount, totalMetricItems);
             } else {
                 metricAck = MetricAck.newBuilder()
                         .setCode(GrpcCodeEnum.SUCCESS.getCode())
@@ -288,15 +285,14 @@ public class MetricService extends MetricServiceGrpc.MetricServiceImplBase {
                         .setFailedCount(0)
                         .setProcessedAt(System.currentTimeMillis())
                         .build();
-                log.info("Batch processing completed successfully, batchId: {}, processed: {}, total metrics: {}", 
-                        request.getBatchId(), processedCount, totalMetricItems);
+                log.info("Batch processing completed successfully, processed: {}, total metrics: {}", processedCount, totalMetricItems);
             }
             
             responseObserver.onNext(metricAck);
             responseObserver.onCompleted();
             
         } catch (Exception e) {
-            log.error("Failed to process batch metrics, batchId: {}", request.getBatchId(), e);
+            log.error("Failed to process batch metrics ",  e);
             
             MetricAck errorAck = MetricAck.newBuilder()
                     .setCode(GrpcCodeEnum.FAIL.getCode())

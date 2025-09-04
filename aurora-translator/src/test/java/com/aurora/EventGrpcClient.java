@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * Event Service gRPC 测试客户端
  * 用于测试事件上报功能
  * 
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/9/3 21:30
  */
 public class EventGrpcClient {
@@ -64,7 +64,6 @@ public class EventGrpcClient {
             
             BatchEventDataRequest batchRequest = BatchEventDataRequest.newBuilder()
                     .addAllEvents(events)
-                    .setBatchId("test-event-batch-" + System.currentTimeMillis())
                     .build();
                     
             EventAck response = blockingStub.reportBatch(batchRequest);

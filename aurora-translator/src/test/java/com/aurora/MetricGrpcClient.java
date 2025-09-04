@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * Metric Service gRPC 测试客户端
  * 用于测试指标上报功能
  * 
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/9/3 21:30
  */
 public class MetricGrpcClient {
@@ -64,7 +64,6 @@ public class MetricGrpcClient {
             
             BatchMetricDataRequest batchRequest = BatchMetricDataRequest.newBuilder()
                     .addAllMetrics(metrics)
-                    .setBatchId("test-metric-batch-" + System.currentTimeMillis())
                     .build();
                     
             MetricAck response = blockingStub.reportBatch(batchRequest);
@@ -124,14 +123,10 @@ public class MetricGrpcClient {
         items.add(MetricDataItem.newBuilder()
                 .setMetricId(1)
                 .setValue(85.5)
-                .setMetricName("cpu_usage")
-                .setUnit("%")
                 .build());
         items.add(MetricDataItem.newBuilder()
                 .setMetricId(2)
                 .setValue(90.0)
-                .setMetricName("memory_usage")
-                .setUnit("MB")
                 .build());
 
 
@@ -140,10 +135,6 @@ public class MetricGrpcClient {
                 .setSourceId("cpu_usage")
                 .setTraceId(ByteString.copyFromUtf8("test-trace-001"))
                 .addAllMetrics(items)
-                .putLabels("host", "test-server-001")
-                .putLabels("service", "aurora-translator")
-                .putLabels("environment", "test")
-                .putLabels("region", "us-west-1")
                 .build();
     }
 

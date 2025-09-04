@@ -1,6 +1,8 @@
 package com.aurora.kafka;
 
 import com.aurora.config.KafkaCustomConfig;
+import com.aurora.grpc.EventDataMessage;
+import com.aurora.grpc.MetricDataMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

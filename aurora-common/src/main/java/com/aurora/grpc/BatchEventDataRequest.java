@@ -32,13 +32,13 @@ private static final long serialVersionUID = 0L;
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.aurora.grpc.EventProto.internal_static_aurora_BatchEventDataRequest_descriptor;
+    return com.aurora.grpc.EventServiceProto.internal_static_aurora_BatchEventDataRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.aurora.grpc.EventProto.internal_static_aurora_BatchEventDataRequest_fieldAccessorTable
+    return com.aurora.grpc.EventServiceProto.internal_static_aurora_BatchEventDataRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             com.aurora.grpc.BatchEventDataRequest.class, com.aurora.grpc.BatchEventDataRequest.Builder.class);
   }
@@ -276,13 +276,13 @@ private static final long serialVersionUID = 0L;
       com.aurora.grpc.BatchEventDataRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.aurora.grpc.EventProto.internal_static_aurora_BatchEventDataRequest_descriptor;
+      return com.aurora.grpc.EventServiceProto.internal_static_aurora_BatchEventDataRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.aurora.grpc.EventProto.internal_static_aurora_BatchEventDataRequest_fieldAccessorTable
+      return com.aurora.grpc.EventServiceProto.internal_static_aurora_BatchEventDataRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.aurora.grpc.BatchEventDataRequest.class, com.aurora.grpc.BatchEventDataRequest.Builder.class);
     }
@@ -314,7 +314,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.aurora.grpc.EventProto.internal_static_aurora_BatchEventDataRequest_descriptor;
+      return com.aurora.grpc.EventServiceProto.internal_static_aurora_BatchEventDataRequest_descriptor;
     }
 
     @java.lang.Override

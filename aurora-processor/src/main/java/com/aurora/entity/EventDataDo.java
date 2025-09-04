@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * 事件数据实体类
  * 对应 ClickHouse event_data 表
  * 
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/9/3 23:00
  */
 @EqualsAndHashCode(callSuper = true)
@@ -31,7 +31,7 @@ public class EventDataDo extends BaseClickhouseData implements Serializable {
     /**
      * 事件类型（4字节无符号整数）
      */
-    private Long eventType;
+    private Integer eventType;
 
     /**
      * 跟踪上下文ID（16字节转32位十六进制）

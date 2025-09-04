@@ -33,7 +33,7 @@ private static final long serialVersionUID = 0L;
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.aurora.grpc.EventProto.internal_static_aurora_EventDataMessage_descriptor;
+    return com.aurora.grpc.EventServiceProto.internal_static_aurora_EventDataMessage_descriptor;
   }
 
   @SuppressWarnings({"rawtypes"})
@@ -51,7 +51,7 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.aurora.grpc.EventProto.internal_static_aurora_EventDataMessage_fieldAccessorTable
+    return com.aurora.grpc.EventServiceProto.internal_static_aurora_EventDataMessage_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             com.aurora.grpc.EventDataMessage.class, com.aurora.grpc.EventDataMessage.Builder.class);
   }
@@ -154,7 +154,7 @@ private static final long serialVersionUID = 0L;
         java.lang.String, java.lang.String> defaultEntry =
             com.google.protobuf.MapEntry
             .<java.lang.String, java.lang.String>newDefaultInstance(
-                com.aurora.grpc.EventProto.internal_static_aurora_EventDataMessage_EventDataEntry_descriptor, 
+                com.aurora.grpc.EventServiceProto.internal_static_aurora_EventDataMessage_EventDataEntry_descriptor, 
                 com.google.protobuf.WireFormat.FieldType.STRING,
                 "",
                 com.google.protobuf.WireFormat.FieldType.STRING,
@@ -468,7 +468,7 @@ java.lang.String defaultValue) {
       com.aurora.grpc.EventDataMessageOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.aurora.grpc.EventProto.internal_static_aurora_EventDataMessage_descriptor;
+      return com.aurora.grpc.EventServiceProto.internal_static_aurora_EventDataMessage_descriptor;
     }
 
     @SuppressWarnings({"rawtypes"})
@@ -496,7 +496,7 @@ java.lang.String defaultValue) {
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.aurora.grpc.EventProto.internal_static_aurora_EventDataMessage_fieldAccessorTable
+      return com.aurora.grpc.EventServiceProto.internal_static_aurora_EventDataMessage_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.aurora.grpc.EventDataMessage.class, com.aurora.grpc.EventDataMessage.Builder.class);
     }
@@ -526,7 +526,7 @@ java.lang.String defaultValue) {
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.aurora.grpc.EventProto.internal_static_aurora_EventDataMessage_descriptor;
+      return com.aurora.grpc.EventServiceProto.internal_static_aurora_EventDataMessage_descriptor;
     }
 
     @java.lang.Override

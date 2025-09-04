@@ -3,8 +3,8 @@
 
 package com.aurora.grpc;
 
-public final class EventProto {
-  private EventProto() {}
+public final class EventServiceProto {
+  private EventServiceProto() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -57,9 +57,9 @@ public final class EventProto {
       "entDataMessage\032\020.aurora.EventAck\022<\n\014Repo" +
       "rtStream\022\030.aurora.EventDataMessage\032\020.aur" +
       "ora.EventAck(\001\022>\n\013ReportBatch\022\035.aurora.B" +
-      "atchEventDataRequest\032\020.aurora.EventAckB0" +
-      "\n\017com.aurora.grpcB\nEventProtoP\001\252\002\016EventD" +
-      "ata.Grpcb\006proto3"
+      "atchEventDataRequest\032\020.aurora.EventAckB7" +
+      "\n\017com.aurora.grpcB\021EventServiceProtoP\001\252\002" +
+      "\016EventData.Grpcb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

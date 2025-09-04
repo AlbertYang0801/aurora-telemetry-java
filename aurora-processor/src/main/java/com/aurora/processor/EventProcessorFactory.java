@@ -2,18 +2,22 @@ package com.aurora.processor;
 
 
 import com.aurora.processor.event.AbstractEventProcessor;
+import com.aurora.processor.event.DefaultEventProcessor;
 import com.aurora.processor.event.process.ProcessStartEventProcessor;
 import com.aurora.processor.event.process.ProcessStopEventProcessor;
 
 /**
  * 按topic分发
  *
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/7/8 11:05
  */
 public enum EventProcessorFactory {
 
     //------------------------------------进程事件---------------------------------
+
+    DEFAULT(1000, new DefaultEventProcessor()),
+
 
     /**
      * 进程启动
@@ -43,7 +47,8 @@ public enum EventProcessorFactory {
                 return factory.eventProcessor;
             }
         }
-        throw new IllegalArgumentException("Unknown eventType: " + eventType);
+        //当作默认事件处理
+        return DEFAULT.eventProcessor;
     }
 
 

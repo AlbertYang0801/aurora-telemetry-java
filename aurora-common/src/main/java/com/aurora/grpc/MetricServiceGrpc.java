@@ -422,7 +422,7 @@ public final class MetricServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return com.aurora.grpc.MetricProto.getDescriptor();
+      return com.aurora.grpc.MetricServiceProto.getDescriptor();
     }
 
     @java.lang.Override

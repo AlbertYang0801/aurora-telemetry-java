@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 
 /**
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/7/16 16:15
  */
 public interface DeviceMetricService extends IService<DeviceMetricDo> {

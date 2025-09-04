@@ -7,7 +7,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 /**
  * 数据先按消费者分发，再按topic分发
  *
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/7/7 18:43
  */
 public abstract class TopicDataProcessor {

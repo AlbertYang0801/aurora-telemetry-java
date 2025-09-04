@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * 进程停止事件
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/8/22 15:47
  */
 public class ProcessStopEventProcessor extends AbstractEventProcessor {

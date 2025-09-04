@@ -5,7 +5,7 @@ package aurora;
 option csharp_namespace = "MetricData.Grpc";
 option java_multiple_files = true;
 option java_package = "com.aurora.grpc";
-option java_outer_classname = "MetricProto";
+option java_outer_classname = "MetricServiceProto";
 
 // 通用指标数据采集服务
 service MetricService {

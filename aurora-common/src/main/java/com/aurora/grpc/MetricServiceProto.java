@@ -3,8 +3,8 @@
 
 package com.aurora.grpc;
 
-public final class MetricProto {
-  private MetricProto() {}
+public final class MetricServiceProto {
+  private MetricServiceProto() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -57,8 +57,8 @@ public final class MetricProto {
       "Ack\022>\n\014ReportStream\022\031.aurora.MetricDataM" +
       "essage\032\021.aurora.MetricAck(\001\022@\n\013ReportBat" +
       "ch\022\036.aurora.BatchMetricDataRequest\032\021.aur" +
-      "ora.MetricAckB2\n\017com.aurora.grpcB\013Metric" +
-      "ProtoP\001\252\002\017MetricData.Grpcb\006proto3"
+      "ora.MetricAckB9\n\017com.aurora.grpcB\022Metric" +
+      "ServiceProtoP\001\252\002\017MetricData.Grpcb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

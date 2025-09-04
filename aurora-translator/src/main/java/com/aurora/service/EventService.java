@@ -2,6 +2,7 @@ package com.aurora.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.aurora.enums.GrpcCodeEnum;
+import com.aurora.grpc.*;
 import com.aurora.kafka.KafkaHelper;
 import com.aurora.monitor.GrpcMetricsCollector;
 import io.grpc.stub.StreamObserver;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Event Service gRPC服务实现
  * 提供事件数据上报功能，支持单条、流式和批量上报模式
  *
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/9/3 20:48
  */
 @GrpcService
@@ -205,7 +206,7 @@ public class EventService extends EventServiceGrpc.EventServiceImplBase {
             }
 
             // 记录批次信息
-            log.info("Processing batch events, batchId: {}, events count: {}", request.getBatchId(), request.getEventsCount());
+            log.info("Processing batch events, events count: {}", request.getEventsCount());
 
             // 批量处理事件
             for (EventDataMessage event : request.getEventsList()) {
@@ -228,8 +229,7 @@ public class EventService extends EventServiceGrpc.EventServiceImplBase {
                         .setFailedCount(failedCount)
                         .setProcessedAt(System.currentTimeMillis())
                         .build();
-                log.warn("Batch processing completed with failures, batchId: {}, processed: {}, failed: {}",
-                        request.getBatchId(), processedCount, failedCount);
+                log.warn("Batch processing completed with failures processed: {}, failed: {}", processedCount, failedCount);
             } else {
                 eventAck = EventAck.newBuilder()
                         .setCode(GrpcCodeEnum.SUCCESS.getCode())
@@ -238,15 +238,14 @@ public class EventService extends EventServiceGrpc.EventServiceImplBase {
                         .setFailedCount(0)
                         .setProcessedAt(System.currentTimeMillis())
                         .build();
-                log.info("Batch processing completed successfully, batchId: {}, processed: {}",
-                        request.getBatchId(), processedCount);
+                log.info("Batch processing completed successfully,  processed: {}", processedCount);
             }
 
             responseObserver.onNext(eventAck);
             responseObserver.onCompleted();
 
         } catch (Exception e) {
-            log.error("Failed to process batch events, batchId: {}", request.getBatchId(), e);
+            log.error("Failed to process batch events : ",  e);
 
             EventAck errorAck = EventAck.newBuilder()
                     .setCode(GrpcCodeEnum.FAIL.getCode())

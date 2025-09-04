@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS aurora.metric_data (
     metric_id Int32 COMMENT '指标id',
     metric_value Float64 COMMENT '指标值'
 ) ENGINE = MergeTree()
-PARTITION BY (toYYYYMM(metric_time), metric_id % 100)  -- 按日期和指标ID分区
+PARTITION BY (toYYYYMM(metric_time), metric_id % 100)  -- 按月和指标ID分区
 PRIMARY KEY (metric_time, metric_id, source_id)  -- 主键优化查询
 ORDER BY (metric_time, metric_id, source_id, timestamp)  -- 排序键
 TTL metric_time + INTERVAL 90 DAY  -- 数据保留90天

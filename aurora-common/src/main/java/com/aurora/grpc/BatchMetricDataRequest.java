@@ -32,13 +32,13 @@ private static final long serialVersionUID = 0L;
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.aurora.grpc.MetricProto.internal_static_aurora_BatchMetricDataRequest_descriptor;
+    return com.aurora.grpc.MetricServiceProto.internal_static_aurora_BatchMetricDataRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.aurora.grpc.MetricProto.internal_static_aurora_BatchMetricDataRequest_fieldAccessorTable
+    return com.aurora.grpc.MetricServiceProto.internal_static_aurora_BatchMetricDataRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             com.aurora.grpc.BatchMetricDataRequest.class, com.aurora.grpc.BatchMetricDataRequest.Builder.class);
   }
@@ -276,13 +276,13 @@ private static final long serialVersionUID = 0L;
       com.aurora.grpc.BatchMetricDataRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.aurora.grpc.MetricProto.internal_static_aurora_BatchMetricDataRequest_descriptor;
+      return com.aurora.grpc.MetricServiceProto.internal_static_aurora_BatchMetricDataRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.aurora.grpc.MetricProto.internal_static_aurora_BatchMetricDataRequest_fieldAccessorTable
+      return com.aurora.grpc.MetricServiceProto.internal_static_aurora_BatchMetricDataRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.aurora.grpc.BatchMetricDataRequest.class, com.aurora.grpc.BatchMetricDataRequest.Builder.class);
     }
@@ -314,7 +314,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.aurora.grpc.MetricProto.internal_static_aurora_BatchMetricDataRequest_descriptor;
+      return com.aurora.grpc.MetricServiceProto.internal_static_aurora_BatchMetricDataRequest_descriptor;
     }
 
     @java.lang.Override

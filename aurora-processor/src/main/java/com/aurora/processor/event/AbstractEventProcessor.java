@@ -5,7 +5,7 @@ import com.aurora.clickhouse.ClickHouseDataExporter;
 import com.aurora.grpc.EventDataMessage;
 
 /**
- * @author yangjunwei
+ * @author AlbertYang
  * @date 2025/8/22 16:02
  */
 public abstract class AbstractEventProcessor {
