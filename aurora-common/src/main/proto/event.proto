@@ -21,11 +21,9 @@ service EventService {
 
 // 批量事件请求消息
 message BatchEventDataRequest {
+  
   // 事件列表
   repeated EventDataMessage events = 1;
-
-  // 批次ID，用于追踪和去重
-  string batchId = 2;
 
 }
 

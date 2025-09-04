@@ -1,4 +1,4 @@
-package com.aurora.config;
+package com.aurora.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

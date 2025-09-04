@@ -3,6 +3,8 @@ package com.aurora.clickhouse.buffer;
 import cn.hutool.core.collection.CollUtil;
 import com.aurora.clickhouse.ClickHouseDataFlushType;
 import com.aurora.clickhouse.FlushTask;
+import com.aurora.entity.BaseClickhouseData;
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +22,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author AlbertYang
  */
-public class DataBuffer<T> {
+@Getter
+public class DataBuffer<T extends BaseClickhouseData> {
+
     public static final Logger logger = LoggerFactory.getLogger(DataBuffer.class);
 
     private final ScheduledExecutorService executorService;
@@ -32,7 +36,7 @@ public class DataBuffer<T> {
      */
     private final AtomicInteger elapsedTime;
 
-    private final FlushTask<T> flushTask;
+    private final FlushTask flushTask;
 
     private final int flushSize;
 
@@ -42,7 +46,7 @@ public class DataBuffer<T> {
 
     public DataBuffer(ClickHouseDataFlushType clickHouseDataFlushType) {
         this.clickHouseDataFlushType = clickHouseDataFlushType;
-        this.flushTask = new FlushTask<>(clickHouseDataFlushType);
+        this.flushTask = new FlushTask(clickHouseDataFlushType);
         this.flushSize = clickHouseDataFlushType.getFlushSize();
         this.flushTime = clickHouseDataFlushType.getFlushTimeSeconds();
         this.queue = new ArrayBlockingQueue<>(flushSize * 2);
@@ -90,6 +94,7 @@ public class DataBuffer<T> {
         queue.drainTo(buffer, queue.size());
 
         if (CollUtil.isNotEmpty(buffer)) {
+            logger.info("{} start flushBuffer", clickHouseDataFlushType.getTableName());
             //写入ClickHouse
             flushTask.run(buffer);
         }
@@ -97,7 +102,6 @@ public class DataBuffer<T> {
     }
 
     public void flushAll() {
-        logger.info("【{}】 flushAll start", clickHouseDataFlushType.getTableName());
         flushBuffer();
     }
 

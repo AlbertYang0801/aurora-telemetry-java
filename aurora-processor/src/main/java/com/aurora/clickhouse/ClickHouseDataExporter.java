@@ -27,7 +27,7 @@ public class ClickHouseDataExporter {
         buffer.insertData(metric, type);
     }
 
-    public void exportBatch(List<? extends BaseClickhouseData> metrics, ClickHouseDataFlushType type) {
+    public void exportBatchToBuffer(List<? extends BaseClickhouseData> metrics, ClickHouseDataFlushType type) {
         metrics.forEach(metric -> buffer.insertData(metric, type));
     }
 

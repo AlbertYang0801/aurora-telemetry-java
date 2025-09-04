@@ -1,60 +1,51 @@
 CREATE DATABASE IF NOT EXISTS aurora;
 
-CREATE TABLE IF NOT EXISTS aurora.device_metric
-(
-    `place_id` UInt32,
-    `ip` String,
-    `time` DateTime64(3, 'Asia/Shanghai'),
-    `c_flag` String,
-    `tid` UInt32,
-    `value` Float64,
-    `date` Date MATERIALIZED toDate(time) -- 物化日期列
-)
-    ENGINE = MergeTree() PARTITION BY date  -- 按天分区(直接使用物化日期列)
-ORDER BY (place_id,ip, tid, time)  -- 保持原有排序键
-TTL time + INTERVAL 7 DAY  -- 设置7天自动过期
+-- 事件数据表
+CREATE TABLE IF NOT EXISTS aurora.event_data (
+    timestamp UInt64 COMMENT '事件时间戳（毫秒）',
+    event_time DateTime64(3) MATERIALIZED fromUnixTimestamp64Milli(timestamp) COMMENT '事件时间（用于查询分区）',
+    event_type UInt32 COMMENT '事件类型（4字节无符号整数）',
+    trace_id FixedString(32) COMMENT '跟踪上下文ID（16字节转32位十六进制）',
+    source_id String COMMENT '上报来源标识',
+    event_data_json String COMMENT '事件数据内容（JSON格式存储map<string,string>）'
+) ENGINE = MergeTree()
+PARTITION BY (toYYYYMM(event_time), event_type % 100)  -- 按月和事件类型分区
+PRIMARY KEY (event_time, event_type, source_id)  -- 主键优化查询
+ORDER BY (event_time, event_type, source_id, timestamp)  -- 排序键
+TTL event_time + INTERVAL 30 DAY  -- 数据保留30天
 SETTINGS index_granularity = 8192;
 
 
-CREATE TABLE IF NOT EXISTS aurora.process_metric
-(
-    `place_id` UInt32,
-    `ip` String,
-    `time` DateTime64(3, 'Asia/Shanghai'),
-    `c_flag` String,
-    `xid` UInt64,
-    `tid` UInt32,
-    `value` Float64,
-    `date` Date MATERIALIZED toDate(time) -- 物化日期列
-)
-    ENGINE = MergeTree() PARTITION BY date  -- 按天分区(直接使用物化日期列)
-ORDER BY (place_id,ip,xid, tid, time)  -- 保持原有排序键
-TTL time + INTERVAL 7 DAY  -- 设置7天自动过期
+-- 指标数据表
+CREATE TABLE IF NOT EXISTS aurora.metric_data (
+    timestamp UInt64 COMMENT '指标时间戳（毫秒）',
+    metric_time DateTime64(3) MATERIALIZED fromUnixTimestamp64Milli(timestamp) COMMENT '指标时间（用于查询分区）',
+    trace_id FixedString(32) COMMENT '跟踪上下文ID（16字节转32位十六进制）',
+    source_id String COMMENT '上报来源标识',
+    metric_id Int32 COMMENT '指标id',
+    metric_value Float64 COMMENT '指标值'
+) ENGINE = MergeTree()
+PARTITION BY (toYYYYMM(metric_time), metric_id % 100)  -- 按日期和指标ID分区
+PRIMARY KEY (metric_time, metric_id, source_id)  -- 主键优化查询
+ORDER BY (metric_time, metric_id, source_id, timestamp)  -- 排序键
+TTL metric_time + INTERVAL 90 DAY  -- 数据保留90天
 SETTINGS index_granularity = 8192;
 
 
-CREATE TABLE IF NOT EXISTS aurora.process_event
-(
-    `place_id` UInt32,
-    `ip` String,
-    `c_flag` String,
-    `time` DateTime64(3, 'Asia/Shanghai'),
-    `event_type` UInt32,
-    `xid` UInt64,
-    `info` Map(String, String),
-    `date` Date MATERIALIZED toDate(time) -- 物化日期列
-)
-    ENGINE = MergeTree() PARTITION BY date  -- 按天分区(直接使用物化日期列)
-ORDER BY (place_id,ip,xid, time, event_type);
+-- 事件数据分布式表
+CREATE TABLE IF NOT EXISTS aurora.event_data_cluster AS aurora.event_data
+ENGINE = Distributed(
+    default,                    -- 集群名称
+    aurora,                     -- 数据库名
+    event_data,                 -- 本地表名
+    xxHash64(source_id, event_type)  -- 分片键
+);
 
-
-
--- 分布式表
-create table aurora.device_metric_cluster as aurora.device_metric
-    ENGINE = Distributed(default, aurora, device_metric, xxHash64(place_id, ip));
-
-create table aurora.process_metric_cluster as aurora.process_metric
-    ENGINE = Distributed(default, aurora, process_metric, xxHash64(place_id, ip, xid));
-
-create table aurora.process_event_cluster as aurora.process_event
-    ENGINE = Distributed(default, aurora, process_event, xxHash64(place_id, ip, xid));
+-- 指标数据分布式表  
+CREATE TABLE IF NOT EXISTS aurora.metric_data_cluster AS aurora.metric_data
+ENGINE = Distributed(
+    default,                    -- 集群名称
+    aurora,                     -- 数据库名
+    metric_data,                -- 本地表名
+    xxHash64(source_id, metric_id)   -- 分片键
+);

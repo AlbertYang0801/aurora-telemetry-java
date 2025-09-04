@@ -1,5 +1,6 @@
-package com.aurora.kafka;
+package com.aurora.kafka.consumer;
 
+import com.aurora.kafka.consumer.KafkaPollMonitor;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
@@ -50,6 +51,10 @@ public class MonitoredKafkaConsumer {
         // 记录本次 poll 花费时间
         monitor.onPollDuration(duration);
         return records;
+    }
+
+    public void commitSync() {
+        consumer.commitSync();
     }
 
     /**

@@ -2,10 +2,6 @@ package com.aurora.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.aurora.enums.GrpcCodeEnum;
-import com.aurora.grpc.BatchEventDataRequest;
-import com.aurora.grpc.EventAck;
-import com.aurora.grpc.EventDataMessage;
-import com.aurora.grpc.EventServiceGrpc;
 import com.aurora.kafka.KafkaHelper;
 import com.aurora.monitor.GrpcMetricsCollector;
 import io.grpc.stub.StreamObserver;

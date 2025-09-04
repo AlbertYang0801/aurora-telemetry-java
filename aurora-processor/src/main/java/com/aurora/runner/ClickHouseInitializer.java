@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 
 /**
+ * ClickHouse 初始化器
+ * 用于在应用启动时注册 ClickHouse 表
+ *
  * @author AlbertYang
  * @date 2025/7/9 16:21
  */

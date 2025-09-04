@@ -1,4 +1,4 @@
-package com.aurora.kafka;
+package com.aurora.kafka.consumer;
 
 /**
  * @author AlbertYang

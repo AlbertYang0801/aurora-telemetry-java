@@ -11,10 +11,10 @@ option java_outer_classname = "MetricProto";
 service MetricService {
   // 单条指标上报
   rpc Report(MetricDataMessage) returns (MetricAck);
-  
+
   // 流式指标上报 - 适合高频连续数据
   rpc ReportStream(stream MetricDataMessage) returns (MetricAck);
-  
+
   // 批量指标上报 - 推荐生产环境使用
   rpc ReportBatch(BatchMetricDataRequest) returns (MetricAck);
 }
@@ -23,59 +23,49 @@ service MetricService {
 message BatchMetricDataRequest {
   // 指标消息列表
   repeated MetricDataMessage metrics = 1;
-  
-  // 批次ID，用于追踪和去重
-  string batchId = 2;
+
 }
 
 // 指标消息 - 核心数据结构
 message MetricDataMessage {
   // 事件时间戳（Unix 毫秒时间戳）
   int64 timestamp = 1;
-  
+
   // 跟踪上下文（16字节的 trace ID）
   bytes traceId = 2;
-  
+
   // 上报来源标识
   string sourceId = 3;
-  
+
   // 指标数据列表
   repeated MetricDataItem metrics = 4;
-  
-  // 通用标签信息 - 适用于本批次所有指标的共同属性
-  map<string, string> labels = 5;
 }
 
 // 指标项数据结构
 message MetricDataItem {
   // 指标类型ID
   int32 metricId = 1;
-  
+
   // 指标值（简化为 double 类型）
   double value = 2;
-  
-  // 指标名称（可选）
-  string metricName = 3;
-  
-  // 指标单位（可选）
-  string unit = 4;
-  
+
+
 }
 
 // 响应确认消息
 message MetricAck {
   // 响应码（200=成功，400=客户端错误，500=服务器错误）
   int32 code = 1;
-  
+
   // 响应消息
   string message = 2;
-  
+
   // 处理的指标数量
   int32 processedCount = 3;
-  
+
   // 失败的指标数量
   int32 failedCount = 4;
-  
+
   // 处理时间戳
   int64 processedAt = 5;
 }

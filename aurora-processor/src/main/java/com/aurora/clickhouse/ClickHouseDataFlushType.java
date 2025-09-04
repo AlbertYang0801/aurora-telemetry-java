@@ -12,8 +12,9 @@ import java.util.stream.Collectors;
 @Getter
 public enum ClickHouseDataFlushType {
 
-    DEVICE_METRIC("device_metric", 5000, 10),
-    PROCESS_METRIC("process_metric", 5000, 10);
+    METRIC("metric", 100000, 60),
+
+    EVENT("event", 10000, 30);
 
     /**
      * 表名

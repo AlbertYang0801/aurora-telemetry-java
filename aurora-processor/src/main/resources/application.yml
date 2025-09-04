@@ -44,33 +44,24 @@ spring:
 # 自定义kafka配置
 kafka:
   custom:
-    # 每个topic必须要有自己的 TopicDataProcessor
     consumers:
-      # 监控默认消费者
-      - name: monitor-consumer
+      # 事件消费者
+      - name: event-consumer
         thread-pool-size: 10
-        consumer-group: monitor-group-test
+        consumer-group: event-group-test
+        # 事件topic，支持追加
         topics:
-          - name: device-event
-            topic: "device-event-test"
-          - name: device-metric
-            topic: "device-metric-test"
+          - name: event
+            topic: "general_event"
 
-      # 监控实时上报消费者
-      - name: fast-monitor-consumer
+      # 指标消费者
+      - name: metric-consumer
         thread-pool-size: 5
-        consumer-group: fast-monitor-group-test
+        consumer-group: metric-group-test
+        # 指标topic，支持追加
         topics:
-          - name: fast-device-metric
-            topic: "fast-device-metric-test"
-
-      # 业务数据上报消费者
-      - name: business-consumer
-        thread-pool-size: 5
-        consumer-group: business-group-test
-        topics:
-          - name: business-event
-            topic: "business-event-test"
+          - name: metric
+            topic: "general_metric"
 
 
 

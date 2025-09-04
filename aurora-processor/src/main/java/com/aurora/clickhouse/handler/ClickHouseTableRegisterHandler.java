@@ -39,7 +39,6 @@ public class ClickHouseTableRegisterHandler {
         Map<Class<?>, String> result = new HashMap<>();
 
         Set<Class<?>> annotatedClasses = reflections.getTypesAnnotatedWith(ClickHouseTable.class);
-
         for (Class<?> clazz : annotatedClasses) {
             ClickHouseTable annotation = clazz.getAnnotation(ClickHouseTable.class);
             result.put(clazz, annotation.value());
