@@ -2,26 +2,29 @@
 
 ## 📌 项目简介
 
-这是一个基于gRPC协议实现的Java端指标采集系统。该系统旨在从终端设备收集实时数据，通过一系列处理流程后存储至ClickHouse数据库，并根据预设规则触发告警通知。系统设计注重高性能、高可用性和可扩展性。
+这是一个基于gRPC协议实现的Java端指标采集系统。该系统旨在从终端设备收集实时数据，通过一系列处理流程后存储至ClickHouse数据库，提供高性能、可靠的数据采集和查询服务。系统设计注重高性能、高可用性和可扩展性。
 
 ## 🧩 架构概述
 
-![image-20250708183247773](https://s2.loli.net/2025/07/08/fjzuOlPIxQyA8TJ.png)
+系统采用模块化设计，主要包含以下组件：
 
 - **终端设备**：负责上报指标数据。
-- **Nginx集群**：作为负载均衡器，接收并分发gRPC请求。
-- **Kafka消息队列**：暂存metric与alarm数据以供后续处理。
-- **Flink数据处理组件**：进行实时流式计算，窗口聚合批量写入ClickHouse。
-- **告警组件**：匹配告警规则，产生告警并通过短信/微信/钉钉/飞书等渠道通知。
-- **ClickHouse数据库**：用于存储和查询历史数据。
+- **aurora-translator**：接收并处理gRPC请求，将数据转发至Kafka。
+- **Kafka消息队列**：高吞吐的分布式消息队列，用于数据缓冲。
+- **aurora-processor**：从Kafka消费数据，进行处理并写入ClickHouse。
+- **ClickHouse数据库**：高性能的OLAP数据库，用于存储和查询历史数据。
+- **aurora-query**：提供REST API接口，用于查询ClickHouse中的数据。
+- **aurora-common**：通用模块，包含公共依赖和工具类。
 
 ## 🔧 技术栈
 
+- Java 17
+- Spring Boot 3.x
 - gRPC - 高效跨语言的远程过程调用
-- Nginx - 负载均衡和反向代理服务器
 - Kafka - 分布式消息队列
-- Flink - 实时流处理引擎
 - ClickHouse - OLAP数据库
+- MyBatis-Plus - ORM框架
+- Druid - 数据库连接池
 
 ## 📦 安装指南
 
@@ -29,61 +32,100 @@
 
 确保已安装以下软件和服务：
 
-- Java Development Kit (JDK)
-- Apache Maven 或 Gradle
-- Docker（如果使用容器化部署）
+- Java Development Kit (JDK) 17
+- Apache Maven 3.8+
 - Kafka
 - ClickHouse
-
 
 ### 安装步骤
 
 1. 克隆仓库到本地机器上：
    ```shell
    git clone <repository-url>
-   cd <project-directory>
+   cd aurora-telemetry-java
    ```
 
-2. 使用Maven或Gradle构建项目：
+2. 使用Maven构建项目：
    ```shell
    mvn clean install
-   # 或者
-   gradle build
    ```
 
-3. 配置并启动所需的服务（如Kafka, Zookeeper, ClickHouse）。
+3. 配置并启动所需的服务：
+   - 启动Kafka服务
+   - 启动ClickHouse服务
+   - 配置各模块的application.yml文件，包括Kafka和ClickHouse连接信息
 
-4. 启动应用服务：
+4. 分别启动各个模块：
    ```shell
-   java -jar target/<your-application>.jar
+   # 启动translator模块（接收gRPC请求）
+   cd aurora-translator
+   mvn spring-boot:run
+   
+   # 启动processor模块（处理数据并写入ClickHouse）
+   cd ../aurora-processor
+   mvn spring-boot:run
+   
+   # 启动query模块（提供数据查询API）
+   cd ../aurora-query
+   mvn spring-boot:run
    ```
 
 ## 🚀 快速开始
 
-一旦所有服务都成功启动，您可以开始发送指标数据到指定的gRPC端点。请参照文档中的API接口定义来构造您的请求。
+一旦所有服务都成功启动，您可以开始发送指标数据到指定的gRPC端点。gRPC服务默认监听19090端口。
 
 ## 📊 功能特性
 
-- 实时数据采集
-- 高性能的数据处理能力
-- 支持多种告警通知方式
-- 数据持久化存储于ClickHouse中
+- 基于gRPC的高效数据采集
+- 高吞吐的Kafka消息队列缓冲
+- 高性能的数据处理和存储
+- 灵活的REST API查询接口
+- 模块化设计，易于扩展和维护
 
-## 📁 目录结构
+## 📁 项目结构
+
+项目采用多模块Maven结构，包含以下核心模块：
 
 ```
-├── src/
-│   ├── main/
-│   │   ├── java/           # Java源代码目录
-│   │   └── resources/      # 配置文件和其他资源文件
-│   └── test/               # 测试代码
-├── pom.xml                 # Maven项目配置文件
+├── aurora-common/          # 通用模块，包含公共依赖和工具类
+│   ├── pom.xml
+│   └── src/main/
+├── aurora-translator/      # gRPC服务模块，接收指标数据并转发到Kafka
+│   ├── pom.xml
+│   └── src/main/
+├── aurora-processor/       # 数据处理模块，从Kafka消费数据并写入ClickHouse
+│   ├── pom.xml
+│   ├── sql/                # 数据库SQL脚本
+│   └── src/main/
+├── aurora-query/           # 查询模块，提供REST API接口
+│   ├── pom.xml
+│   └── src/main/
+├── pom.xml                 # 父项目Maven配置
 └── README.md               # 项目说明文档
 ```
 
-## 📝 文档
+## 📝 各模块功能说明
 
-更多详细的开发文档、API参考以及贡献指南，请查看[这里](docs/)。
+### aurora-common
+通用模块，提供各模块共享的依赖和工具类，包括gRPC和Protocol Buffers相关配置。
+
+### aurora-translator
+负责接收终端设备发送的gRPC请求，解析请求数据，并将数据转发至Kafka消息队列。主要功能：
+- 提供gRPC服务接口
+- 数据格式转换
+- 将数据写入Kafka指定主题
+
+### aurora-processor
+从Kafka消费数据，进行处理，并将处理后的数据写入ClickHouse数据库。主要功能：
+- 配置Kafka消费者
+- 处理不同类型的指标数据
+- 批量写入ClickHouse
+
+### aurora-query
+提供REST API接口，用于查询ClickHouse中的指标数据。主要功能：
+- 提供数据查询接口
+- 集成MyBatis-Plus进行数据访问
+- 使用Druid连接池管理数据库连接
 
 ## 👥 贡献者
 
@@ -91,7 +133,7 @@
 
 ## 💬 反馈与支持
 
-对于任何问题或想要提出反馈，请访问我们的[论坛/GitHub Issues页面]。
+对于任何问题或想要提出反馈，请访问我们的GitHub Issues页面。
 
 ## 📜 许可证
 
