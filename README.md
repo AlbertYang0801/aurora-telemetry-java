@@ -17,11 +17,12 @@ aurora-telemetry 是面向终端设备的实时指标数据采集与分析平台
 
 - **终端设备**：负责上报指标数据。
 - **aurora-translator**：接收并处理 gRPC 请求，将数据转发至 Kafka。
-- **Kafka消息队列**：高吞吐的分布式消息队列，用于数据缓冲。
 - **aurora-processor**：从 Kafka 消费数据，进行处理并写入 ClickHouse。
-- **ClickHouse数据库**：高性能的 OLAP 数据库，用于存储和查询历史数据。
 - **aurora-query**：提供 REST API 接口，用于查询 ClickHouse 中的数据。
 - **aurora-common**：通用模块，包含公共依赖和工具类。
+- **Kafka消息队列**：高吞吐的分布式消息队列，用于数据缓冲。
+- **ClickHouse数据库**：高性能的 OLAP 数据库，用于存储和查询历史数据。
+
 
 ## 🔧 技术栈
 
