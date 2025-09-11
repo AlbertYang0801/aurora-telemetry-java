@@ -40,6 +40,7 @@ public class KafkaCustomReceiverTask implements Runnable {
     protected volatile boolean working = true;
 
     protected final AtomicLong logCount = new AtomicLong(0);
+    protected final AtomicLong errorCount = new AtomicLong(0);
 
     protected MonitoredKafkaConsumer monitoredKafkaConsumer;
     protected ThreadPoolExecutor executor;
@@ -111,12 +112,8 @@ public class KafkaCustomReceiverTask implements Runnable {
                     if (processorRemainingCapacity() < getExecutorQueueSize() / 2) {
                         continue;
                     }
-                    ConsumerRecords<String, byte[]> records = monitoredKafkaConsumer.poll();
-                    if (records.isEmpty()) {
-                        continue;
-                    }
-                    //单线程拉取，异步处理消息，自动提交offset，允许丢数据
-                    executor.execute(() -> processConsumerRecords(records));
+                    //单线程拉取，异步处理消息，允许丢部分数据
+                    processConsumerRecords(monitoredKafkaConsumer.poll());
                 } catch (Throwable exception) {
                     logger.error("{} receiver error !", consumerName, exception);
                 }
@@ -127,6 +124,9 @@ public class KafkaCustomReceiverTask implements Runnable {
     }
 
     private void processConsumerRecords(ConsumerRecords<String, byte[]> records) {
+        if (records.isEmpty()) {
+            return;
+        }
         for (ConsumerRecord<String, byte[]> record : records) {
             String topicName = topicMap.get(record.topic());
             if (topicName == null || !TopicDataProcessorFactory.contains(topicName)) {
@@ -137,7 +137,18 @@ public class KafkaCustomReceiverTask implements Runnable {
             //根据topic分发消息
             TopicDataProcessor topicDataProcessor = TopicDataProcessorFactory.getProcessor(topicName);
             if (Objects.nonNull(topicDataProcessor)) {
-                topicDataProcessor.process(record);
+                //异步消费数据
+                //指标事件类数据，允许丢失部分数据
+                //如果需要保证消费速率和数据不丢失，比如业务指标。建议手动提交offset，并做并发处理。
+                executor.execute(() -> {
+                    try {
+                        topicDataProcessor.process(record);
+                    } catch (Exception e) {
+                        // 性能指标数据通常不需要严格处理失败情况
+                        errorCount.incrementAndGet();
+                        logger.error("{} process message error, topic: {}, partition: {}, offset: {}", consumerName, record.topic(), record.partition(), record.offset(), e);
+                    }
+                });
             }
         }
         //日志记录处理数量
@@ -177,7 +188,7 @@ public class KafkaCustomReceiverTask implements Runnable {
     private void logThroughput() {
         long currentCount = logCount.getAndSet(0);
         if (currentCount > 0) {
-            logger.info("{} processed {} messages", consumerName, currentCount);
+            logger.info("{} processed {} messages, error count: {}", consumerName, currentCount, errorCount.get());
         }
     }
 

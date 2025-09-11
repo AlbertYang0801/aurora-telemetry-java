@@ -39,7 +39,7 @@ public class MetricDataProcessor extends TopicDataProcessor {
             metricDo.setTimestamp(metricDataMessage.getTimestamp());
             metricDo.setTraceId(metricDataMessage.getTraceId().toStringUtf8());
             metricDo.setSourceId(metricDataMessage.getSourceId());
-            metricDo.setMetricId(metricItem.getMetricId());
+            metricDo.setMetricCode(metricItem.getMetricCode());
             metricDo.setMetricValue(metricItem.getValue());
             deviceMetricDos.add(metricDo);
         }

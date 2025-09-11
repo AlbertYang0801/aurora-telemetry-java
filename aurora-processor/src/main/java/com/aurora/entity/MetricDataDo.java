@@ -40,7 +40,7 @@ public class MetricDataDo extends BaseClickhouseData implements Serializable {
     /**
      * 指标ID
      */
-    private Integer metricId;
+    private String metricCode;
 
     /**
      * 指标值

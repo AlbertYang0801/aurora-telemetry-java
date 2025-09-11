@@ -47,17 +47,5 @@ public enum TopicDataProcessorFactory {
         return null;
     }
 
-    public static void main(String[] args) {
-        TopicDataProcessor processor = getProcessor("metric");
-        TopicDataProcessor processor1 = getProcessor("metric");
-        System.out.println(processor);
-        System.out.println(processor1);
-
-        TopicDataProcessor processor2 = getProcessor("event");
-        TopicDataProcessor processor12 = getProcessor("event");
-        System.out.println(processor2);
-        System.out.println(processor12);
-    }
-
 
 }
