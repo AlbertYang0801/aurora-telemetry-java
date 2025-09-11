@@ -43,8 +43,8 @@ message MetricDataMessage {
 
 // 指标项数据结构
 message MetricDataItem {
-  // 指标类型ID
-  int32 metricId = 1;
+  // 指标code
+  string metricCode = 1;
 
   // 指标值（简化为 double 类型）
   double value = 2;

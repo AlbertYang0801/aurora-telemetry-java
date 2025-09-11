@@ -48,17 +48,18 @@ public final class MetricServiceProto {
       "cDataMessage\"r\n\021MetricDataMessage\022\021\n\ttim" +
       "estamp\030\001 \001(\003\022\017\n\007traceId\030\002 \001(\014\022\020\n\010sourceI" +
       "d\030\003 \001(\t\022\'\n\007metrics\030\004 \003(\0132\026.aurora.Metric" +
-      "DataItem\"1\n\016MetricDataItem\022\020\n\010metricId\030\001" +
-      " \001(\005\022\r\n\005value\030\002 \001(\001\"l\n\tMetricAck\022\014\n\004code" +
-      "\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\022\026\n\016processedCoun" +
-      "t\030\003 \001(\005\022\023\n\013failedCount\030\004 \001(\005\022\023\n\013processe" +
-      "dAt\030\005 \001(\0032\311\001\n\rMetricService\0226\n\006Report\022\031." +
-      "aurora.MetricDataMessage\032\021.aurora.Metric" +
-      "Ack\022>\n\014ReportStream\022\031.aurora.MetricDataM" +
-      "essage\032\021.aurora.MetricAck(\001\022@\n\013ReportBat" +
-      "ch\022\036.aurora.BatchMetricDataRequest\032\021.aur" +
-      "ora.MetricAckB9\n\017com.aurora.grpcB\022Metric" +
-      "ServiceProtoP\001\252\002\017MetricData.Grpcb\006proto3"
+      "DataItem\"3\n\016MetricDataItem\022\022\n\nmetricCode" +
+      "\030\001 \001(\t\022\r\n\005value\030\002 \001(\001\"l\n\tMetricAck\022\014\n\004co" +
+      "de\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\022\026\n\016processedCo" +
+      "unt\030\003 \001(\005\022\023\n\013failedCount\030\004 \001(\005\022\023\n\013proces" +
+      "sedAt\030\005 \001(\0032\311\001\n\rMetricService\0226\n\006Report\022" +
+      "\031.aurora.MetricDataMessage\032\021.aurora.Metr" +
+      "icAck\022>\n\014ReportStream\022\031.aurora.MetricDat" +
+      "aMessage\032\021.aurora.MetricAck(\001\022@\n\013ReportB" +
+      "atch\022\036.aurora.BatchMetricDataRequest\032\021.a" +
+      "urora.MetricAckB9\n\017com.aurora.grpcB\022Metr" +
+      "icServiceProtoP\001\252\002\017MetricData.Grpcb\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -81,7 +82,7 @@ public final class MetricServiceProto {
     internal_static_aurora_MetricDataItem_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_aurora_MetricDataItem_descriptor,
-        new java.lang.String[] { "MetricId", "Value", });
+        new java.lang.String[] { "MetricCode", "Value", });
     internal_static_aurora_MetricAck_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_aurora_MetricAck_fieldAccessorTable = new

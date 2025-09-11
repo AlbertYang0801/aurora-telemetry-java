@@ -20,6 +20,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private MetricDataItem() {
+    metricCode_ = "";
   }
 
   @java.lang.Override
@@ -42,19 +43,51 @@ private static final long serialVersionUID = 0L;
             com.aurora.grpc.MetricDataItem.class, com.aurora.grpc.MetricDataItem.Builder.class);
   }
 
-  public static final int METRICID_FIELD_NUMBER = 1;
-  private int metricId_ = 0;
+  public static final int METRICCODE_FIELD_NUMBER = 1;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object metricCode_ = "";
   /**
    * <pre>
-   * 指标类型ID
+   * 指标code
    * </pre>
    *
-   * <code>int32 metricId = 1;</code>
-   * @return The metricId.
+   * <code>string metricCode = 1;</code>
+   * @return The metricCode.
    */
   @java.lang.Override
-  public int getMetricId() {
-    return metricId_;
+  public java.lang.String getMetricCode() {
+    java.lang.Object ref = metricCode_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      metricCode_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * 指标code
+   * </pre>
+   *
+   * <code>string metricCode = 1;</code>
+   * @return The bytes for metricCode.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getMetricCodeBytes() {
+    java.lang.Object ref = metricCode_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      metricCode_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   public static final int VALUE_FIELD_NUMBER = 2;
@@ -86,8 +119,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (metricId_ != 0) {
-      output.writeInt32(1, metricId_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(metricCode_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, metricCode_);
     }
     if (java.lang.Double.doubleToRawLongBits(value_) != 0) {
       output.writeDouble(2, value_);
@@ -101,9 +134,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (metricId_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, metricId_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(metricCode_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, metricCode_);
     }
     if (java.lang.Double.doubleToRawLongBits(value_) != 0) {
       size += com.google.protobuf.CodedOutputStream
@@ -124,8 +156,8 @@ private static final long serialVersionUID = 0L;
     }
     com.aurora.grpc.MetricDataItem other = (com.aurora.grpc.MetricDataItem) obj;
 
-    if (getMetricId()
-        != other.getMetricId()) return false;
+    if (!getMetricCode()
+        .equals(other.getMetricCode())) return false;
     if (java.lang.Double.doubleToLongBits(getValue())
         != java.lang.Double.doubleToLongBits(
             other.getValue())) return false;
@@ -140,8 +172,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + METRICID_FIELD_NUMBER;
-    hash = (53 * hash) + getMetricId();
+    hash = (37 * hash) + METRICCODE_FIELD_NUMBER;
+    hash = (53 * hash) + getMetricCode().hashCode();
     hash = (37 * hash) + VALUE_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         java.lang.Double.doubleToLongBits(getValue()));
@@ -280,7 +312,7 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      metricId_ = 0;
+      metricCode_ = "";
       value_ = 0D;
       return this;
     }
@@ -316,7 +348,7 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(com.aurora.grpc.MetricDataItem result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.metricId_ = metricId_;
+        result.metricCode_ = metricCode_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.value_ = value_;
@@ -367,8 +399,10 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.aurora.grpc.MetricDataItem other) {
       if (other == com.aurora.grpc.MetricDataItem.getDefaultInstance()) return this;
-      if (other.getMetricId() != 0) {
-        setMetricId(other.getMetricId());
+      if (!other.getMetricCode().isEmpty()) {
+        metricCode_ = other.metricCode_;
+        bitField0_ |= 0x00000001;
+        onChanged();
       }
       if (other.getValue() != 0D) {
         setValue(other.getValue());
@@ -399,11 +433,11 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            case 8: {
-              metricId_ = input.readInt32();
+            case 10: {
+              metricCode_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
-            } // case 8
+            } // case 10
             case 17: {
               value_ = input.readDouble();
               bitField0_ |= 0x00000002;
@@ -426,46 +460,94 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private int metricId_ ;
+    private java.lang.Object metricCode_ = "";
     /**
      * <pre>
-     * 指标类型ID
+     * 指标code
      * </pre>
      *
-     * <code>int32 metricId = 1;</code>
-     * @return The metricId.
+     * <code>string metricCode = 1;</code>
+     * @return The metricCode.
      */
-    @java.lang.Override
-    public int getMetricId() {
-      return metricId_;
+    public java.lang.String getMetricCode() {
+      java.lang.Object ref = metricCode_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        metricCode_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
     /**
      * <pre>
-     * 指标类型ID
+     * 指标code
      * </pre>
      *
-     * <code>int32 metricId = 1;</code>
-     * @param value The metricId to set.
+     * <code>string metricCode = 1;</code>
+     * @return The bytes for metricCode.
+     */
+    public com.google.protobuf.ByteString
+        getMetricCodeBytes() {
+      java.lang.Object ref = metricCode_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        metricCode_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * 指标code
+     * </pre>
+     *
+     * <code>string metricCode = 1;</code>
+     * @param value The metricCode to set.
      * @return This builder for chaining.
      */
-    public Builder setMetricId(int value) {
-
-      metricId_ = value;
+    public Builder setMetricCode(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      metricCode_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     * 指标类型ID
+     * 指标code
      * </pre>
      *
-     * <code>int32 metricId = 1;</code>
+     * <code>string metricCode = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearMetricId() {
+    public Builder clearMetricCode() {
+      metricCode_ = getDefaultInstance().getMetricCode();
       bitField0_ = (bitField0_ & ~0x00000001);
-      metricId_ = 0;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * 指标code
+     * </pre>
+     *
+     * <code>string metricCode = 1;</code>
+     * @param value The bytes for metricCode to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMetricCodeBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      metricCode_ = value;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }

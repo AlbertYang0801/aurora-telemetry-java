@@ -9,13 +9,23 @@ public interface MetricDataItemOrBuilder extends
 
   /**
    * <pre>
-   * 指标类型ID
+   * 指标code
    * </pre>
    *
-   * <code>int32 metricId = 1;</code>
-   * @return The metricId.
+   * <code>string metricCode = 1;</code>
+   * @return The metricCode.
    */
-  int getMetricId();
+  java.lang.String getMetricCode();
+  /**
+   * <pre>
+   * 指标code
+   * </pre>
+   *
+   * <code>string metricCode = 1;</code>
+   * @return The bytes for metricCode.
+   */
+  com.google.protobuf.ByteString
+      getMetricCodeBytes();
 
   /**
    * <pre>
